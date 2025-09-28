@@ -1,5 +1,6 @@
 import React from "react";
 import { BsPeople } from "react-icons/bs";
+import { CgAddR } from "react-icons/cg";
 import { CiCreditCard2, CiShop, CiViewList } from "react-icons/ci";
 import { LuLayoutList, LuRefreshCw } from "react-icons/lu";
 import { Link, NavLink } from "react-router";
@@ -112,7 +113,7 @@ const Navbar = () => {
             </div>
           </NavLink>
         ))}
-        <Link to={'/'}></Link>
+        <Link to={'/'} className="flex gap-3 items-center text-[12px] font-semibold font-poppins text-[#07070C] py-[17px] pl-[21px] hover:bg-brandColor rounded-[10px] hover:text-[#fff] group duration-[.4s]"><CgAddR className="text-xl text-[#7E7E8F] group-hover:text-[#fff] duration-[.4s]" />Add Category</Link>
       </nav>
       {/* ------------------- catagory items */}
     </>

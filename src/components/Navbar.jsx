@@ -5,9 +5,10 @@ import { CiCreditCard2, CiShop, CiViewList } from "react-icons/ci";
 import { LuLayoutList, LuRefreshCw } from "react-icons/lu";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import { Link, NavLink } from "react-router";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
 
   const navItems = [
     {
@@ -82,33 +83,31 @@ const Navbar = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+{/* <IoIosArrowForward /> */}
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <div className="lg:hidden fixed top-4 left-4 z-50">
-        <button
-          onClick={toggleMobileMenu}
-          className="p-2 rounded-lg bg-brandColor text-white shadow-lg"
-        >
-          {isMobileMenuOpen ? (
-            <HiOutlineX className="text-2xl" />
-          ) : (
-            <HiOutlineMenu className="text-2xl" />
-          )}
-        </button>
-      </div>
 
-      {/* Mobile Overlay */}
-      {isMobileMenuOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={closeMobileMenu}
-        ></div>
-      )}
+
 
       {/* Main Navbar */}
-      <nav
+      <nav className=" relative">
+
+      
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden fixed top-4 right-[-13%] z-50">
+            <button
+              onClick={toggleMobileMenu}
+              className="p-2 rounded-lg bg-brandColor text-white shadow-lg"
+            >
+              {isMobileMenuOpen ? (
+                <HiOutlineX className="text-2xl" />
+              ) : (
+                <IoIosArrowForward className="text-2xl" />
+              )}
+            </button>
+          </div>
+      <div
         className={`
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           fixed lg:sticky top-0 left-0 z-40
@@ -120,6 +119,7 @@ const Navbar = () => {
           overflow-y-auto
         `}
       >
+
         {/* Navigation Items */}
         <div className="space-y-1">
           {navItems.map((item, index) => (
@@ -182,8 +182,8 @@ const Navbar = () => {
             <span className="truncate">Add Category</span>
           </Link>
         </div>
-      </nav>
-
+      </div>
+</nav>
       {/* Content Spacer for Desktop */}
       <div className="hidden lg:block w-[258px] flex-shrink-0"></div>
     </>

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsPeople } from "react-icons/bs";
 import { CgAddR } from "react-icons/cg";
 import { CiCreditCard2, CiShop, CiViewList } from "react-icons/ci";
 import { LuLayoutList, LuRefreshCw } from "react-icons/lu";
+import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const navItems = [
     {
       navbarIcon: <LuLayoutList className="text-xl" />,
@@ -39,83 +42,150 @@ const Navbar = () => {
     },
   ];
 
-  const catagoryItem = [
+  const categoryItem = [
     {
-      catagoryName: "Laptops",
-      catagoryLink: "Laptops",
-      catagoryQty: "8",
-      catagoryColor: "bg-[#ECE663]",
+      categoryName: "Laptops",
+      categoryLink: "Laptops",
+      categoryQty: "8",
+      categoryColor: "bg-[#ECE663]",
     },
     {
-      catagoryName: "Mobile phones",
-      catagoryLink: "Mobile phones",
-      catagoryQty: "6",
-      catagoryColor: "bg-[#EC8C56]",
+      categoryName: "Mobile phones",
+      categoryLink: "Mobile phones",
+      categoryQty: "6",
+      categoryColor: "bg-[#EC8C56]",
     },
     {
-      catagoryName: "Desktops",
-      catagoryLink: "Desktops",
-      catagoryQty: "5",
-      catagoryColor: "bg-[#FB7BB8]",
+      categoryName: "Desktops",
+      categoryLink: "Desktops",
+      categoryQty: "5",
+      categoryColor: "bg-[#FB7BB8]",
     },
     {
-      catagoryName: "Accessories",
-      catagoryLink: "Accessories",
-      catagoryQty: "",
-      catagoryColor: "",
+      categoryName: "Accessories",
+      categoryLink: "Accessories",
+      categoryQty: "",
+      categoryColor: "",
     },
     {
-      catagoryName: "Accessories",
-      catagoryLink: "Accessories",
-      catagoryQty: "7",
-      catagoryColor: "bg-[#50D1B2]",
+      categoryName: "Accessories",
+      categoryLink: "Accessories",
+      categoryQty: "7",
+      categoryColor: "bg-[#50D1B2]",
     },
   ];
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
-      {/* --------------------- navbar items */}
+      {/* Mobile Menu Button */}
+      <div className="lg:hidden fixed top-4 left-4 z-50">
+        <button
+          onClick={toggleMobileMenu}
+          className="p-2 rounded-lg bg-brandColor text-white shadow-lg"
+        >
+          {isMobileMenuOpen ? (
+            <HiOutlineX className="text-2xl" />
+          ) : (
+            <HiOutlineMenu className="text-2xl" />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={closeMobileMenu}
+        ></div>
+      )}
+
+      {/* Main Navbar */}
       <nav
-        className={`w-[258px] border-r border-[#E8EDF2] h-screen  sticky pt-[113px] px-[25px]`}
+        className={`
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          fixed lg:sticky top-0 left-0 z-40
+          w-[280px] md:w-[258px] 
+          border-r border-[#E8EDF2] 
+          h-screen bg-white
+          pt-[60px] lg:pt-[113px] px-[25px]
+          transform transition-transform duration-300 ease-in-out
+          overflow-y-auto
+        `}
       >
-        {navItems.map((item) => (
-          <NavLink
-            to={item.navbarLink}
-            className={({ isActive }) =>
-              isActive
-                ? "py-[17px] pl-[21px] text-sm font-semibold font-poppins text-[#fff] bg-brandColor flex rounded-[17px]  gap-[10px] items-center "
-                : "py-[17px] pl-[21px] text-sm font-semibold font-poppins text-secend  flex rounded-[17px]  gap-[10px] items-center "
-            }
-          >
-            {item.navbarIcon}
-            {item.navbarContent}
-          </NavLink>
-        ))}
-        <div className="w-full h-[1px] bg-[#E8EDF2] mt-[10px]"></div>
-        <h2 className="text-[12px] font-semibold font-poppins text-[#07070C] mb-3 pl-6 mt-[33px]">
-          Categories
-        </h2>
-        {catagoryItem.map((item) => (
-          <NavLink
-            to={item.catagoryLink}
-            className={({ isActive }) =>
-              isActive
-                ? "py-[17px] pl-[21px] text-sm font-semibold font-poppins text-[#fff] bg-brandColor flex rounded-[17px] justify-between  gap-[10px] items-center "
-                : "py-[17px] pl-[21px] text-sm font-semibold font-poppins text-secend  flex rounded-[17px]  gap-[10px] justify-between items-center "
-            }
-          >
-            {item.catagoryName}
-            <div
-              className={`w-[18px] h-[18px] rounded-[4px] flex justify-center items-center text-[11px] font-medium font-poppins text-[#07070C] 
-              ${item.catagoryColor}`}
+        {/* Navigation Items */}
+        <div className="space-y-1">
+          {navItems.map((item, index) => (
+            <NavLink
+              key={index}
+              to={item.navbarLink}
+              onClick={closeMobileMenu}
+              className={({ isActive }) =>
+                isActive
+                  ? "py-[17px] pl-[21px] text-sm font-semibold font-poppins text-[#fff] bg-brandColor flex rounded-[17px] gap-[10px] items-center transition-all duration-200"
+                  : "py-[17px] pl-[21px] text-sm font-semibold font-poppins text-secend flex rounded-[17px] gap-[10px] items-center hover:bg-gray-50 transition-all duration-200"
+              }
             >
-              {item.catagoryQty}
-            </div>
-          </NavLink>
-        ))}
-        <Link to={'/'} className="flex gap-3 items-center text-[12px] font-semibold font-poppins text-[#07070C] py-[17px] pl-[21px] hover:bg-brandColor rounded-[10px] hover:text-[#fff] group duration-[.4s]"><CgAddR className="text-xl text-[#7E7E8F] group-hover:text-[#fff] duration-[.4s]" />Add Category</Link>
+              {item.navbarIcon}
+              <span className="truncate">{item.navbarContent}</span>
+            </NavLink>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="w-full h-[1px] bg-[#E8EDF2] mt-[20px] mb-[20px]"></div>
+
+        {/* Categories Section */}
+        <div>
+          <h2 className="text-[12px] font-semibold font-poppins text-[#07070C] mb-3 pl-6">
+            Categories
+          </h2>
+          <div className="space-y-1">
+            {categoryItem.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.categoryLink}
+                onClick={closeMobileMenu}
+                className={({ isActive }) =>
+                  isActive
+                    ? "py-[17px] pl-[21px] pr-[15px] text-sm font-semibold font-poppins text-[#fff] bg-brandColor flex rounded-[17px] justify-between items-center transition-all duration-200"
+                    : "py-[17px] pl-[21px] pr-[15px] text-sm font-semibold font-poppins text-secend flex rounded-[17px] justify-between items-center hover:bg-gray-50 transition-all duration-200"
+                }
+              >
+                <span className="truncate flex-1">{item.categoryName}</span>
+                {item.categoryQty && (
+                  <div
+                    className={`w-[18px] h-[18px] rounded-[4px] flex justify-center items-center text-[11px] font-medium font-poppins text-[#07070C] flex-shrink-0 ml-2
+                    ${item.categoryColor}`}
+                  >
+                    {item.categoryQty}
+                  </div>
+                )}
+              </NavLink>
+            ))}
+          </div>
+
+          {/* Add Category Button */}
+          <Link 
+            to={'/'} 
+            onClick={closeMobileMenu}
+            className="flex gap-3 items-center text-[12px] font-semibold font-poppins text-[#07070C] py-[17px] pl-[21px] hover:bg-brandColor rounded-[10px] hover:text-[#fff] group duration-[.4s] mt-2"
+          >
+            <CgAddR className="text-xl text-[#7E7E8F] group-hover:text-[#fff] duration-[.4s]" />
+            <span className="truncate">Add Category</span>
+          </Link>
+        </div>
       </nav>
-      {/* ------------------- catagory items */}
+
+      {/* Content Spacer for Desktop */}
+      <div className="hidden lg:block w-[258px] flex-shrink-0"></div>
     </>
   );
 };

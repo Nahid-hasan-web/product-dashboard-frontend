@@ -8,9 +8,11 @@ const LayoutOne = () => {
     <>
        <div className='flex'>
         <Navbar/>
-         <TopNav/>
+        <div className='w-screen'>
+          <TopNav/>
+          <Outlet/>
+        </div>
        </div>
-        <Outlet/>
     </>
   )
 }

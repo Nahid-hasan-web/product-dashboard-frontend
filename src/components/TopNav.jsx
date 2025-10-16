@@ -9,6 +9,7 @@ const TopNav = () => {
   const [listening, setListening] = useState(false);
   const [searchText, setSearchText] = useState("");
   const recognitionRef = useRef(null);
+  const [show_profile_option ,set_show_profile_option  ]   = useState(false)
 
   useEffect(() => {
     if (
@@ -77,16 +78,20 @@ const TopNav = () => {
         >
           <IoNotificationsOutline />
         </button>
-        <button className="w-[48px] h-[48px] bg-brandColor rounded-full"></button>
-        <div className= " bg-white  rounded-[5px]  absolute top-[10%] right-10 shadow-[1px_0px_11px_0px_rgba(0,_0,_0,_0.1)] text-center">
-          <MdArrowDropUp className="text-3xl  absolute top-[-20px] text-brandColor left-[70px] " />
+        <button onClick={()=>set_show_profile_option(!show_profile_option)} className="w-[48px] h-[48px] bg-brandColor rounded-full"></button>
+          {
+            show_profile_option&&
+            <div className= " bg-white  rounded-[5px]  absolute top-[10%] right-10 shadow-[1px_0px_11px_0px_rgba(0,_0,_0,_0.1)] text-center">
+              <MdArrowDropUp className="text-3xl  absolute top-[-20px] text-brandColor left-[70px] " />
 
 
-          <button className="flex items-center  px-5 py-2 gap-3  hover:bg-brandColor hover:text-white duration-[.4s]"><FaRegUser />Profile</button>
-          <button className="flex items-center  px-5 py-2 gap-3  hover:bg-brandColor hover:text-white duration-[.4s]"><RiSettingsLine />Setting</button>
-          <button className="flex items-center  px-5 py-2 gap-3 hover:bg-brandColor hover:text-white duration-[.4s]"><RiLogoutCircleRLine />Logout</button>
-        </div>
+              <button className="flex items-center  px-5 py-2 gap-3  hover:bg-brandColor hover:text-white duration-[.4s]"><FaRegUser />Profile</button>
+              <button className="flex items-center  px-5 py-2 gap-3  hover:bg-brandColor hover:text-white duration-[.4s]"><RiSettingsLine />Setting</button>
+              <button className="flex items-center  px-5 py-2 gap-3 hover:bg-brandColor hover:text-white duration-[.4s]"><RiLogoutCircleRLine />Logout</button>
+            </div>
+          }
       </div>
+
     </div>
   );
 };

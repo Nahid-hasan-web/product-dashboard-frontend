@@ -184,8 +184,6 @@ const Navbar = () => {
         </div>
       </div>
 </nav>
-      {/* Content Spacer for Desktop */}
-      <div className="hidden lg:block w-[258px] flex-shrink-0"></div>
     </>
   );
 };

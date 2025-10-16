@@ -52,7 +52,11 @@ const TopNav = () => {
           placeholder="Type or speak..."
         />
         <button
-          className={`text-xl ${listening ? 'text-red-500' : 'text-[#7E7E8F]'}`}
+          className={`w-8 h-8  text-xl flex justify-center items-center duration-[0.4s] ${
+            listening 
+              ? 'rounded-full bg-brandColor text-white animate-pulse'
+              : 'text-[#7E7E8F]'
+          }`}
           onClick={toggleListening}
         >
           <CiMicrophoneOn />

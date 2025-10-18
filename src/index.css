@@ -11,3 +11,13 @@
     --color-secend:#7E7E8F;
     --color-bgColor:#F5F5FA;
 }
+
+
+@layer{
+    .commonHead{
+        @apply text-base font-medium font-poppins text-[#07070C]
+    }
+    .inputText {
+    @apply text-base font-normal font-poppins text-[#9A9AAF] outline-none pl-[13px]
+    }
+}

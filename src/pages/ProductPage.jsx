@@ -1,6 +1,5 @@
-import React from "react";
+
 import { CiViewList } from "react-icons/ci";
-import { Link } from "react-router";
 import CommonProductOptin from "../components/common/CommonProductOptin";
 import { BsBoxSeam } from "react-icons/bs";
 
@@ -21,6 +20,7 @@ const ProductPage = () => {
         }
         cardcontent={"Add Product"}
         cardLink={'/addProduct'}
+        cardColor={'blue-100'}
         />
       </div>
     </>

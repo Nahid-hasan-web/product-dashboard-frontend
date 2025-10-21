@@ -1,10 +1,11 @@
 
-import { CiViewList } from "react-icons/ci";
+import { CiShop, CiViewList } from "react-icons/ci";
 import CommonProductOptin from "../components/common/CommonProductOptin";
 import { BsBoxSeam } from "react-icons/bs";
 import BreadCrumb from "../components/common/BreadCrumb";
 import CommonHead from "../components/common/CommonHead";
 import { VscInbox } from "react-icons/vsc";
+import { BiCategory } from "react-icons/bi";
 
 const ProductPage = () => {
   return (
@@ -37,14 +38,14 @@ const ProductPage = () => {
        <div className="mt-5 flex gap-5 flex-wrap  ">
         <CommonProductOptin
           cardIcon={
-            <CiViewList className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
+            <BiCategory className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
         }
         cardcontent={"View catagory"}
         cardLink={'/'}
         />
         <CommonProductOptin
           cardIcon={
-            <BsBoxSeam className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
+            <CiShop className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
         }
         cardcontent={"View Product"}
         cardLink={'/addProduct'}

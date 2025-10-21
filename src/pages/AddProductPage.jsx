@@ -6,7 +6,7 @@ import PorductUploadBoard from "../components/PorductUploadBoard";
 const AddProductPage = () => {
   return (
     <div className="mt-[42px] px-[23px]">
-      <CommonHead />
+      <CommonHead CommonHead_content={'Uplod Product'} />
       <BreadCrumb />
       <PorductUploadBoard/>
     </div>

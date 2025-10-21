@@ -7,7 +7,6 @@ const PorductUploadBoard = () => {
   const [imgPath, setImgPath] = useState("");
   const [subImage, setSubImage] = useState([]);
 
-  console.log(subImage);
   return (
     <>
       <div className=" flex-1 p-[50px] border border-[#E8EDF2]  bg-white rounded-[16px] mt-[18px]">

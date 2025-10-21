@@ -16,7 +16,6 @@ const Navbar = () => {
       navbarIcon: <LuLayoutList className="text-xl" />,
       navbarContent: "Dashboard",
       navbarLink: "/",
-      dropDown: [{ dropDowncontent: "", dropDownLink: "", dropDownIcon: "" }],
     },
     {
       navbarIcon: <CiShop className="text-xl" />,
@@ -135,9 +134,7 @@ const Navbar = () => {
                 <div className="flex gap-[10px]">
                   {item.navbarIcon}
                   <span className="truncate">{item.navbarContent}</span>
-                  {item.dropDown&&
-                   <MdArrowDropDown className="text-xl" />
-                  }
+                 
                 </div>
               </NavLink>
             ))}

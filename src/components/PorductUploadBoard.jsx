@@ -178,6 +178,10 @@ const PorductUploadBoard = () => {
                 </div>
               </div>
             )}
+            <div className="flex gap-5 items-center mt-[58px]">
+              <button className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-white bg-brandColor active:scale-[1.1]">Upload</button>
+              <button className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-secend bg-gray-200 active:scale-[1.1]">Reset</button>
+            </div>
           </div>
         </div>
       </div>

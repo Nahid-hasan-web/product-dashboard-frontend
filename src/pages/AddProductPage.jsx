@@ -6,9 +6,9 @@ import PorductUploadBoard from "../components/PorductUploadBoard";
 const AddProductPage = () => {
   return (
     <div className="mt-[42px] px-[23px]">
-      <CommonHead CommonHead_content={'Uplod Product'} />
-      <BreadCrumb />
-      <PorductUploadBoard/>
+      <CommonHead CommonHead_content={"Uplod Product"} />
+      <BreadCrumb pageName={"Add Product"} pageLink={"/addProduct"} />
+      <PorductUploadBoard />
     </div>
   );
 };

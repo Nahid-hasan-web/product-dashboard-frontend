@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import ProductDetails from './components/ProductDetails'
 import AddProductPage from './pages/AddProductPage'
 import ProductPage from './pages/ProductPage'
+import AllProductPage from './pages/AllProductPage'
 const App = () => {
   const myRoute = createBrowserRouter(createRoutesFromElements(
     <Route>
@@ -13,6 +14,7 @@ const App = () => {
           <Route index element={<Home/>}/>
           <Route path='/products' element={<ProductPage/>}/>
           <Route path='/addProduct' element={<AddProductPage/>}/>
+          <Route path='/allProduct' element={<AllProductPage/>}/>
         </Route>
     </Route>
   ))

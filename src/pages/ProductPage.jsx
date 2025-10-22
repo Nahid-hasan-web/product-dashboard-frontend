@@ -12,7 +12,7 @@ const ProductPage = () => {
     <>
     <div className="px-[30px] pt-10">
     <CommonHead CommonHead_content={'Product Page'} />
-    <BreadCrumb/>
+    <BreadCrumb firstPage={'Products'} pageLink={'/products'}/>
     <h2 className="text-2xl font-medium font-poppins text-secend mt-5 ">Add Items</h2>
 
       <div className="mt-5 flex gap-5 flex-wrap  ">
@@ -48,7 +48,7 @@ const ProductPage = () => {
             <CiShop className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
         }
         cardcontent={"View Product"}
-        cardLink={'/addProduct'}
+        cardLink={'/allProduct'}
         cardColor={'blue-100'}
         />
         <CommonProductOptin

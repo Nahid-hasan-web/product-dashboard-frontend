@@ -3,7 +3,7 @@ import CommonHead from "../components/common/CommonHead";
 import BreadCrumb from "../components/common/BreadCrumb";
 import { GoDotFill } from "react-icons/go";
 import { IoIosStar } from "react-icons/io";
-
+import { Pagination } from 'antd';
 const AllProductPage = () => {
   return (
     <>
@@ -15,6 +15,7 @@ const AllProductPage = () => {
           subpage={"All Product"}
           subpageLink={"/allProduct"}
         />
+        {/* --------------- product display board */}
          <div className="w-full p-[25px] rounded-[16px] bg-white mt-[18px]">
           {/* ------------------ all product list */}
           <div className="flex justify-between">
@@ -37,15 +38,20 @@ const AllProductPage = () => {
             <h2 className=" w-[91px]  text-[12px] font-poppins font-semibold text-[#07070C] ">1450</h2>
             <h2 className=" w-[82px]  text-[12px] font-poppins font-semibold text-[#07070C] flex items-center gap-1 "><GoDotFill className="text-green-500" />Active</h2>
             <h2 className=" w-[24px]  text-[12px] font-poppins font-semibold text-secend ">45</h2>
-            <div className=" w-[72px]  text-[12px] font-poppins font-semibold text-[#FEA73E] flex items-center gap-1 ">
-              <IoIosStar />
-              <IoIosStar />
-              <IoIosStar />
-              <IoIosStar />
-              <IoIosStar />
+            <div className=" w-[72px]   font-poppins font-semibold text-[#FEA73E] flex items-center gap-1 ">
+              <IoIosStar className="text-[16px]"/>
+              <IoIosStar className="text-[16px]"/>  
+              <IoIosStar className="text-[16px]"/>
+              <IoIosStar className="text-[16px]"/>
+              <IoIosStar className="text-[16px]"/>
             </div>
             <h2 className=" w-[80px]  text-[12px] font-poppins font-semibold text-[#07070C] ">20/45</h2>
         </div>
+
+      </div>
+      {/* ------------------ pagination */}
+      <div className="mt-[40px] flex  justify-end">
+       <Pagination defaultCurrent={6} total={500} />
 
       </div>
       </div>

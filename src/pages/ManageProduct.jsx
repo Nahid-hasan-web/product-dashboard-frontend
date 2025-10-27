@@ -4,6 +4,7 @@ import CommonHead from "../components/common/CommonHead";
 import BreadCrumb from "../components/common/BreadCrumb";
 import SingelProductCart from "../components/common/SingelProductCart";
 import ProductListHead from "../components/common/ProductListHead";
+import AccroHead from "../components/common/AccroHead";
 
 const ManageProduct = () => {
   const onChange = (key) => {
@@ -12,7 +13,7 @@ const ManageProduct = () => {
   const items = [
     {
       key: "1",
-      label: "All Product",
+      label: <AccroHead accroHeadContent={"All Product"} accroHeadNo={"2"} accroNoBg={'bg-[#ECE663]'}/>,
       children: <>
         <ProductListHead/>
           {[1,2,3,4].map((item)=>(
@@ -22,7 +23,7 @@ const ManageProduct = () => {
     },
     {
       key: "2",
-      label: "Pending product",
+      label: <AccroHead accroHeadContent={"Active Product"} accroHeadNo={"80"} accroNoBg={'bg-[#50D1B2]'}/>,
          children: <>
         <ProductListHead/>
           {[1,2,3,4].map((item)=>(
@@ -32,7 +33,7 @@ const ManageProduct = () => {
     },
     {
       key: "3",
-      label: "Acive product",
+      label: <AccroHead accroHeadContent={"Pending Product"} accroHeadNo={"20"} accroNoBg={'bg-[#FB7BB8]'}/>,
          children: <>
         <ProductListHead/>
           {[1,2,3,4].map((item)=>(
@@ -42,7 +43,7 @@ const ManageProduct = () => {
     },
     {
       key: "4",
-      label: "Reject Product",
+      label: <AccroHead accroHeadContent={"All Product"} accroHeadNo={"2"} accroNoBg={'bg-red-300'}/>,
          children: <>
         <ProductListHead/>
           {[1,2,3,4].map((item)=>(

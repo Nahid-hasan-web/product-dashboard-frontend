@@ -12,7 +12,10 @@ import ProductDetails from "./components/ProductDetails";
 import AddProductPage from "./pages/AddProductPage";
 import ProductPage from "./pages/ProductPage";
 import AllProductPage from "./pages/AllProductPage";
+import ManageProduct from "./pages/manageProduct";
 const App = () => {
+
+  
   const myRoute = createBrowserRouter(
     createRoutesFromElements(
       <Route>
@@ -21,6 +24,7 @@ const App = () => {
           <Route path="/products" element={<ProductPage />} />
           <Route path="/addProduct" element={<AddProductPage />} />
           <Route path="/allProduct" element={<AllProductPage />} />
+          <Route path="/manage-prouduct" element={<ManageProduct />} />
         </Route>
       </Route>
     )

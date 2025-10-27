@@ -8,7 +8,7 @@ const BreadCrumb = ({
   firstPage,
   firstPageLink,
   subpage,
-  subpageLink,
+
 }) => {
   return (
     <>
@@ -23,7 +23,7 @@ const BreadCrumb = ({
         <MdKeyboardArrowRight className="text-secend" />
         <Link
           to={pageLink}
-          className="flex items-center gap-1 text-sm font-normal font-poppins text-brandColor"
+          className={`flex items-center gap-1 text-sm font-normal font-poppins ${subpage? "text-secend":"text-brandColor"}`}
         >
           {pageName}
         </Link>
@@ -37,7 +37,7 @@ const BreadCrumb = ({
         </Link>
         {subpage && <MdKeyboardArrowRight className="text-secend" />}
         <Link
-          to={subpageLink}
+          to={'#'}
           className="flex items-center gap-1 text-sm font-normal font-poppins text-brandColor"
         >
           {subpage}

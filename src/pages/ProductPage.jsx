@@ -59,7 +59,7 @@ const ProductPage = () => {
               <VscInbox className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
             }
             cardcontent={"Manage Product"}
-            cardLink={"/addProduct"}
+            cardLink={"/manage-prouduct"}
             cardColor={"blue-100"}
           />
         </div>

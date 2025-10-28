@@ -2,7 +2,7 @@ import React from "react";
 
 const OrderHead = () => {
   return (
-    <div className="w-full">
+    <div className="w-full  rounded-[5px] py-[13px] bg-gray-100 px-2">
       <div className="flex items-center gap-4 text-[#9A9AAF] text-base font-normal font-poppins">
         {/* Checkbox - 18x18 and colored */}
         <div className="flex items-center">

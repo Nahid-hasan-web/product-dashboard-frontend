@@ -13,7 +13,7 @@ const SingelOrderinfo = ({
 }) => {
   return (
     <div className="w-full">
-      <div className="flex items-center gap-4 text-[#9A9AAF] text-base font-normal font-poppins py-3">
+      <div className="flex items-center gap-4 text-[#9A9AAF] text-base font-normal font-poppins py-[15px] border-b border-[#E8EDF2] px-2">
         {/* Checkbox */}
         <div className="flex items-center">
           <input
@@ -56,7 +56,7 @@ const SingelOrderinfo = ({
           <span className="min-w-[100px]">{total}</span>
         </div>
 
-        <div className="min-w-[150px] flex items-center justify-end">
+        <div className="min-w-[150px]">
           <button onClick={onActionClick} className="text-[#9A9AAF]">
             <RxDotsHorizontal className="text-lg" />
           </button>

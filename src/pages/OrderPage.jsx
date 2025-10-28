@@ -5,6 +5,7 @@ import ProductListHead from "../components/common/ProductListHead";
 import OrderHead from "../components/common/OrderHead";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { Dropdown, Space ,DatePicker } from "antd";
+import SingelOrderinfo from "../components/common/SingelOrderinfo";
 const { RangePicker } = DatePicker;
 
 const OrderPage = () => {
@@ -79,8 +80,11 @@ const OrderPage = () => {
           </div>
           </div>
         </div>
+        {/* --------------- order list */}
         <div className="w-full p-[25px] mt-[18px] bg-white rounded-[16px]">
+          <h2 className="text-base  font-poppins font-semibold text-[#07070C] mb-4">Recent Orders</h2>
           <OrderHead />
+          <SingelOrderinfo/>
         </div>
       </div>
     </>

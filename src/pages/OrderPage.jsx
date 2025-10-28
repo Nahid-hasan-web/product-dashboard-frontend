@@ -4,7 +4,8 @@ import BreadCrumb from "../components/common/BreadCrumb";
 import ProductListHead from "../components/common/ProductListHead";
 import OrderHead from "../components/common/OrderHead";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { Dropdown, Space } from "antd";
+import { Dropdown, Space ,DatePicker } from "antd";
+const { RangePicker } = DatePicker;
 
 const OrderPage = () => {
   const items = [
@@ -40,8 +41,10 @@ const OrderPage = () => {
         <BreadCrumb pageName={"All Products"} pageLink={"/all-orders"} />
         <div className="flex justify-between items-center mt-[26px]">
           <div className="relative">
-           
-            <Dropdown className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]" menu={{ items }}>
+            <Dropdown
+              className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]"
+              menu={{ items }}
+            >
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
                   All Category
@@ -50,6 +53,30 @@ const OrderPage = () => {
               </a>
             </Dropdown>
             <MdOutlineArrowDropDown className=" absolute top-[50%] translate-y-[-50%] text-secend right-5" />
+          </div>
+          {/* ------------------------------- filter options */}
+          <div className="flex flex-wrap gap-[12px] items-center">
+            {/* --- select date range */}
+            <div className="relative">
+              <Space direction="vertical" size={12}>
+                <RangePicker  />
+              </Space>
+            </div>
+            {/* ------------------ deleviry status*/}
+            <div className="relative w-fit">
+            <Dropdown
+              className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]"
+              menu={{ items }}
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  All Category
+                  {/* <DownOutlined /> */}
+                </Space>
+              </a>
+            </Dropdown>
+            <MdOutlineArrowDropDown className=" absolute top-[50%] translate-y-[-50%] text-secend right-5" />
+          </div>
           </div>
         </div>
         <div className="w-full p-[25px] mt-[18px] bg-white rounded-[16px]">

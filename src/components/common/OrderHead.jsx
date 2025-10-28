@@ -1,6 +1,6 @@
 import React from "react";
 
-const OrderHead = () => {
+const OrderHead = ({ one, two, three, four, five, six }) => {
   return (
     <div className="w-full  rounded-[5px] py-[13px] bg-gray-100 px-2">
       <div className="flex items-center gap-4 text-[#9A9AAF] text-base font-normal font-poppins">
@@ -15,12 +15,12 @@ const OrderHead = () => {
 
         {/* Header titles - match design order and spacing */}
         <div className="flex flex-1 items-center gap-8  justify-between">
-          <span className="min-w-[120px]">Order ID</span>
-          <span className="min-w-[300px]">Customer name</span>
-          <span className="min-w-[180px]">Payment Method</span>
-          <span className="min-w-[150px]">Date</span>
-          <span className="min-w-[150px]">Status</span>
-          <span className="min-w-[100px]">Total</span>
+          <span className="min-w-[120px]">{one}</span>
+          <span className="min-w-[300px]">{two}</span>
+          <span className="min-w-[180px]">{three}</span>
+          <span className="min-w-[150px]">{four}</span>
+          <span className="min-w-[150px]">{five}</span>
+          <span className="min-w-[100px]">{six}</span>
         </div>
 
         <div className="min-w-[150px]">Actions</div>

@@ -14,9 +14,8 @@ import ProductPage from "./pages/ProductPage";
 import AllProductPage from "./pages/AllProductPage";
 import ManageProduct from "./pages/manageProduct";
 import OrderPage from "./pages/OrderPage";
+import ClientsListPage from "./pages/ClientsListPage";
 const App = () => {
-
-  
   const myRoute = createBrowserRouter(
     createRoutesFromElements(
       <Route>
@@ -26,7 +25,8 @@ const App = () => {
           <Route path="/addProduct" element={<AddProductPage />} />
           <Route path="/allProduct" element={<AllProductPage />} />
           <Route path="/manage-prouduct" element={<ManageProduct />} />
-          <Route path="/all-orders" element={<OrderPage/>} />
+          <Route path="/all-orders" element={<OrderPage />} />
+          <Route path="/client-list" element={<ClientsListPage />} />
         </Route>
       </Route>
     )

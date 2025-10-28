@@ -40,7 +40,7 @@ const Navbar = () => {
     {
       navbarIcon: <BsPeople className="text-xl" />,
       navbarContent: "Clients",
-      navbarLink: "/clients",
+      navbarLink: "/client-list",
     },
   ];
 
@@ -134,7 +134,6 @@ const Navbar = () => {
                 <div className="flex gap-[10px]">
                   {item.navbarIcon}
                   <span className="truncate">{item.navbarContent}</span>
-                 
                 </div>
               </NavLink>
             ))}

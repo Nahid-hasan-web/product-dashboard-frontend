@@ -4,11 +4,11 @@ import BreadCrumb from "../components/common/BreadCrumb";
 import ProductListHead from "../components/common/ProductListHead";
 import OrderHead from "../components/common/OrderHead";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { Dropdown, Space ,DatePicker, Pagination } from "antd";
+import { Dropdown, Space, DatePicker, Pagination } from "antd";
 import SingelOrderinfo from "../components/common/SingelOrderinfo";
 const { RangePicker } = DatePicker;
 
-const OrderPage = () => {
+const ClientsListPage = () => {
   const items = [
     {
       key: "1",
@@ -39,7 +39,7 @@ const OrderPage = () => {
     <>
       <div className="px-[23px] py-[42px]">
         <CommonHead CommonHead_content={"All Orders"} />
-        <BreadCrumb pageName={"All Products"} pageLink={"/all-orders"} />
+        <BreadCrumb pageName={"All Customer list"} pageLink={"/client-list"} />
         <div className="flex justify-between items-center mt-[26px]">
           <div className="relative">
             <Dropdown
@@ -60,33 +60,34 @@ const OrderPage = () => {
             {/* --- select date range */}
             <div className="relative">
               <Space direction="vertical" size={12}>
-                <RangePicker  />
+                <RangePicker />
               </Space>
             </div>
             {/* ------------------ deleviry status*/}
             <div className="relative w-fit">
-            <Dropdown
-              className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]"
-              menu={{ items }}
-            >
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  All Category
-                  {/* <DownOutlined /> */}
-                </Space>
-              </a>
-            </Dropdown>
-            <MdOutlineArrowDropDown className=" absolute top-[50%] translate-y-[-50%] text-secend right-5" />
-          </div>
+              <Dropdown
+                className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]"
+                menu={{ items }}
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    All Category
+                  </Space>
+                </a>
+              </Dropdown>
+              <MdOutlineArrowDropDown className=" absolute top-[50%] translate-y-[-50%] text-secend right-5" />
+            </div>
           </div>
         </div>
         {/* --------------- order list */}
         <div className="w-full p-[25px] mt-[18px] bg-white rounded-[16px]">
-          <h2 className="text-base  font-poppins font-semibold text-[#07070C] mb-4">Recent Orders</h2>
-          <OrderHead />
-          {
-            [1,2,3,4,5,6,7].map((item)=>(<SingelOrderinfo/>))
-          }
+          <h2 className="text-base  font-poppins font-semibold text-[#07070C] mb-4">
+            Recent Orders
+          </h2>
+          <OrderHead one={'Order No'} two={'Name'} three={'Email'} four={'Join data'} five={'Status'} six={'Total amound'} />
+          {[1, 2, 3, 4, 5, 6, 7].map((item) => (
+            <SingelOrderinfo />
+          ))}
           <br />
           <Pagination align="end" defaultCurrent={6} total={500} />
         </div>
@@ -95,4 +96,4 @@ const OrderPage = () => {
   );
 };
 
-export default OrderPage;
+export default ClientsListPage;

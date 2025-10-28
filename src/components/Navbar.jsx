@@ -25,7 +25,7 @@ const Navbar = () => {
     {
       navbarIcon: <CiViewList className="text-xl" />,
       navbarContent: "Orders",
-      navbarLink: "/orders",
+      navbarLink: "/all-orders",
     },
     {
       navbarIcon: <CiCreditCard2 className="text-xl" />,

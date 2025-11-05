@@ -124,12 +124,13 @@ const data = {
           <h2 className="text-lg font-medium font-poppins text-secend">
             Daily sales Report
           </h2>
+          <Line options={options} data={data} />
         </div>
         <div class="col-span-2 row-span-2 col-start-4  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Mounthly sell Unite Report
           </h2>
-          <Line options={options} data={data} />
+          
         </div>
         <div class="row-span-2 col-start-4 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">

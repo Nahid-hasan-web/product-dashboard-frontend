@@ -16,65 +16,12 @@ import BreadCrumb from "../components/common/BreadCrumb";
 import OrderHead from "../components/common/OrderHead";
 import SingelOrderinfo from "../components/common/SingelOrderinfo";
 import { Pagination } from "antd";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
-
 
 
 
 const Home = () => {
-  ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
- const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' ,
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Line Chart',
-    },
-  },
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.number.int({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.number.int({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
+ 
+  
   return (
     <div
       className="min-h-screen p-4 sm:p-6 lg:p-8 antialiased"
@@ -120,11 +67,10 @@ const data = {
       </section>
       {/* --------------- dashboard charts */}
       <div class="grid grid-cols-5 grid-rows-5 gap-5   h-[700px]">
-        <div class="col-span-3 row-span-2  bg-white flex p-4   rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
+        <div class="col-span-3 row-span-2  bg-white  p-4   rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Daily sales Report
           </h2>
-          <Line options={options} data={data} />
         </div>
         <div class="col-span-2 row-span-2 col-start-4  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">

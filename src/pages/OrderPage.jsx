@@ -39,7 +39,7 @@ const OrderPage = () => {
     <>
       <div className="px-[23px] py-[42px]">
         <CommonHead CommonHead_content={"All Orders"} />
-        <BreadCrumb pageName={"All Products"} pageLink={"/all-orders"} />
+        <BreadCrumb pageName={"All Orders"} pageLink={"/all-orders"} />
         <div className="flex justify-between items-center mt-[26px]">
           <div className="relative">
             <Dropdown
@@ -83,7 +83,7 @@ const OrderPage = () => {
         {/* --------------- order list */}
         <div className="w-full p-[25px] mt-[18px] bg-white rounded-[16px]">
           <h2 className="text-base  font-poppins font-semibold text-[#07070C] mb-4">Recent Orders</h2>
-          <OrderHead />
+          <OrderHead one={"Order No"} two={'Customer Name'}  three={'Pament by'} four={'Order Date'} five={'Delivery Status'} six={'Price'}/>
           {
             [1,2,3,4,5,6,7].map((item)=>(<SingelOrderinfo/>))
           }

@@ -5,6 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { IoIosStar } from "react-icons/io";
 import { Pagination } from "antd";
 import SingelProductCart from "../components/common/SingelProductCart";
+import ProductListHead from "../components/common/ProductListHead";
 const AllProductPage = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const AllProductPage = () => {
 
         {/* ------------------ pagination */}
         <div className="w-full p-[25px] rounded-[16px] bg-white mt-[18px] ">
+          <ProductListHead/>
           <SingelProductCart />
           <div className="mt-5">
           <Pagination align="end" defaultCurrent={6} total={500} />

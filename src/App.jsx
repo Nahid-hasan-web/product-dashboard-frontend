@@ -15,6 +15,7 @@ import AllProductPage from "./pages/AllProductPage";
 import ManageProduct from "./pages/manageProduct";
 import OrderPage from "./pages/OrderPage";
 import ClientsListPage from "./pages/ClientsListPage";
+import Login from "./pages/auth/Login";
 const App = () => {
   const myRoute = createBrowserRouter(
     createRoutesFromElements(
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/all-orders" element={<OrderPage />} />
           <Route path="/client-list" element={<ClientsListPage />} />
         </Route>
+        <Route path='/login' element={<Login/>}/>
       </Route>
     )
   );

@@ -9,6 +9,13 @@ const Login = () => {
     const [formError, setFormError] = useState({emailError :"border-gray-300 ",  passwordError:'border-gray-300 '})
 
 
+    const handelSubmit = (e)=>{
+        e.preventDefault()
+        if(!formData.email){ setFormError((prev)=>({...prev , emailError:'border-gray-300'}))}
+            if(!formData.password) return setFormError((prev)=>({...prev , passwordError:'border-gray-300'}))
+                console.log(formData)
+    }
+
 
   return (
     <>
@@ -18,7 +25,7 @@ const Login = () => {
             Welcome back
           </h2>
 
-          <form className="space-y-4 sm:space-y-6">
+          <form  onSubmit={handelSubmit} className="space-y-4 sm:space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -27,10 +34,10 @@ const Login = () => {
                 Email
               </label>
               <input
+                onChange={(e)=>{setFormData((prev)=>({...prev , email:e.target.value})) ; setFormError((prev)=>({...prev , emailError:'border-gray-300'}))}}
                 type="email"
                 id="email"
-             className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border ${formError.emailError} focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base`}
-
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border ${formError.emailError} focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base`}
                 placeholder="Enter your email"
               />
             </div>
@@ -43,6 +50,7 @@ const Login = () => {
                 Password
               </label>
               <input
+                onChange={(e)=>{setFormData((prev)=>({...prev , password:e.target.value})) ; setFormError((prev)=>({...prev , passwordError:'border-gray-300'})) }}
                 type= {showPass? "text" : "password" }
                 id="password"
                 className={`w-full px-3 sm:px-4 py-2.5 sm:py-3  ${formError.passwordError} rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base`}
@@ -62,7 +70,7 @@ const Login = () => {
             <Link className="text-[12px] block text-end mb-0  font-medium font-poppins text-brandColor" to={'/forgotPassword'}>forgot password?</Link>
             <button
               type="submit"
-              className="w-full py-2.5 sm:py-3 mt-2 sm:mt-4 bg-brandColor text-white rounded-lg font-medium hover:bg-opacity-90 transition-colors text-sm sm:text-base"
+              className="w-full active:scale-[1.1] duration-[4s] py-2.5 sm:py-3 mt-2 sm:mt-4 bg-brandColor text-white rounded-lg font-medium hover:bg-opacity-90 transition-colors text-sm sm:text-base"
             >
               Login
             </button>

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router";
 
 const Register = () => {
+  const [showPass , setShowPass] = useState(false)
   return (
     <>
       <div className="w-full min-h-screen bg-gray-50 flex justify-center items-center px-4 py-4 sm:py-8">
@@ -19,18 +21,18 @@ const Register = () => {
                 User Name
               </label>
               <input
+                placeholder="User name"
                 type="text"
                 id="username"
                 name="username"
-                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base"
-                placeholder="Enter your username"
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base`}
               />
             </div>
 
             <div>
               <label
                 htmlFor="email"
-                className="text-sm font-medium font-poppins text-secend block mb-2"
+                className="text-sm font-medium font-poppins text-secend block mb-1.5 sm:mb-2"
               >
                 Email
               </label>
@@ -38,7 +40,7 @@ const Register = () => {
                 type="email"
                 id="email"
                 name="email"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent"
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base`}
                 placeholder="Enter your email"
               />
             </div>
@@ -46,23 +48,23 @@ const Register = () => {
             <div>
               <label
                 htmlFor="address"
-                className="text-sm font-medium font-poppins text-secend block mb-2"
+                className="text-sm font-medium font-poppins text-secend block mb-1.5 sm:mb-2"
               >
                 Address
               </label>
               <input
+                placeholder="Enter Your Address"
                 type="text"
                 id="address"
                 name="address"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent"
-                placeholder="Enter your address"
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base`}
               />
             </div>
 
             <div>
               <label
                 htmlFor="phone"
-                className="text-sm font-medium font-poppins text-secend block mb-2"
+                className="text-sm font-medium font-poppins text-secend block mb-1.5 sm:mb-2"
               >
                 Phone
               </label>
@@ -70,36 +72,46 @@ const Register = () => {
                 type="tel"
                 id="phone"
                 name="phone"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent"
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base`}
                 placeholder="Enter your phone number"
               />
             </div>
 
-            <div>
+            <div className=" relative">
               <label
                 htmlFor="password"
-                className="text-sm font-medium font-poppins text-secend block mb-2"
+                className={`text-sm font-medium font-poppins text-secend block mb-1.5 sm:mb-2 `}
               >
                 Password
               </label>
               <input
-                type="password"
+                type={showPass ? "text" : "password"}
                 id="password"
-                name="password"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent"
+                className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brandColor focus:border-transparent text-sm sm:text-base`}
                 placeholder="Enter your password"
               />
+              {showPass ? (
+                <IoEyeOutline
+                  onClick={() => setShowPass(!showPass)}
+                  className=" absolute bottom-4 text-secend right-3"
+                />
+              ) : (
+                <IoEyeOffOutline
+                  onClick={() => setShowPass(!showPass)}
+                  className=" absolute bottom-4 text-secend right-3"
+                />
+              )}
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-brandColor text-white rounded-lg font-medium hover:bg-opacity-90 transition-colors mt-6"
+              className="w-full py-2.5 sm:py-3 mt-2 sm:mt-4 bg-brandColor text-white rounded-lg font-medium hover:bg-opacity-90 transition-colors text-sm sm:text-base"
             >
               Register
             </button>
           </form>
 
-          <p className="mt-6 text-center text-gray-600">
+          <p className="mt-4 sm:mt-6 text-center text-gray-600 text-sm sm:text-base">
             Already have an account?{" "}
             <Link
               to="/login"

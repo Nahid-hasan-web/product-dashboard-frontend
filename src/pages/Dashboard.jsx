@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FiSearch,
   FiUser,
@@ -16,11 +16,42 @@ import BreadCrumb from "../components/common/BreadCrumb";
 import OrderHead from "../components/common/OrderHead";
 import SingelOrderinfo from "../components/common/SingelOrderinfo";
 import { Pagination } from "antd";
+import axios from "axios";
+
+import Cookies from 'js-cookie';
 
 
-
-const Home = () => {
+const Dashboard = () => {
  
+
+
+
+
+
+
+
+
+
+
+
+
+  useEffect(()=>{
+  axios.get('http://localhost:8000/dashboard/dashbaord-report', {
+    headers: {
+      Authorization: `Bearer ${Cookies.get('token')} `  // send token in header
+    }
+  })
+  .then((res)=>{
+    console.log(res)
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+  },[])
+
+
+
+
   
   return (
     <div
@@ -66,34 +97,34 @@ const Home = () => {
         />
       </section>
       {/* --------------- dashboard charts */}
-      <div class="grid grid-cols-5 grid-rows-5 gap-5   h-[700px]">
-        <div class="col-span-3 row-span-2  bg-white  p-4   rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
+      <div className="grid grid-cols-5 grid-rows-5 gap-5   h-[700px]">
+        <div className="col-span-3 row-span-2  bg-white  p-4   rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Daily sales Report
           </h2>
         </div>
-        <div class="col-span-2 row-span-2 col-start-4  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
+        <div className="col-span-2 row-span-2 col-start-4  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Mounthly sell Unite Report
           </h2>
           
         </div>
-        <div class="row-span-2 col-start-4 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
+        <div className="row-span-2 col-start-4 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Cancel orders ratio
           </h2>
         </div>
-        <div class="col-span-3 row-span-3 col-start-1 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
+        <div className="col-span-3 row-span-3 col-start-1 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Mounthly sales report
           </h2>
         </div>
-        <div class="row-span-3 col-start-5 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
+        <div className="row-span-3 col-start-5 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Top selling product
           </h2>
         </div>
-        <div class="col-start-4 row-start-5  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
+        <div className="col-start-4 row-start-5  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Monthly revinew
           </h2>
@@ -122,4 +153,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

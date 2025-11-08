@@ -5,6 +5,8 @@ import { IoEyeOutline } from "react-icons/io5";
 import axios from "axios";
 import tostifyMsg from "../../helpers/totstifyMsg";
 import { BeatLoader } from "react-spinners";
+import Cookies from 'js-cookie';
+
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -37,6 +39,9 @@ const Login = () => {
       tostifyMsg("sucess", "Login sucess");
       navigate("/");
       setLoading(false);
+      Cookies.set('token' , res.data.accessToken)
+      console.log(res)
+
     } catch (err) {
       tostifyMsg("error", err.response.data);
       setLoading(false);

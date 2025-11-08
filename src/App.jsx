@@ -17,6 +17,7 @@ import OrderPage from "./pages/OrderPage";
 import ClientsListPage from "./pages/ClientsListPage";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import { ToastContainer } from "react-toastify";
 const App = () => {
   const myRoute = createBrowserRouter(
     createRoutesFromElements(
@@ -37,6 +38,7 @@ const App = () => {
   );
   return (
     <>
+    <ToastContainer/>
       <RouterProvider router={myRoute} />
     </>
   );

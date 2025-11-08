@@ -2,20 +2,36 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
+import axios from "axios";
+import tostifyMsg from "../../helpers/totstifyMsg";
 
 const Login = () => {
     const [showPass , setShowPass] = useState(false)
     const [formData  ,setFormData] = useState({email:'' , password:''})
     const [formError, setFormError] = useState({emailError :"border-gray-300 ",  passwordError:'border-gray-300 '})
 
+    
+    const handelSubmit = async (e) => {
+  e.preventDefault();
 
-    const handelSubmit = (e)=>{
-        e.preventDefault()
-        if(!formData.email){ setFormError((prev)=>({...prev , emailError:'border-gray-300'}))}
-            if(!formData.password) return setFormError((prev)=>({...prev , passwordError:'border-gray-300'}))
-                console.log(formData)
-    }
+  // make sure formData is defined
+  if (!formData || typeof formData !== "object") return;
 
+  if (!formData.email) {
+    setFormError((prev) => ({ ...prev, emailError: "border-red-500" }));
+  }
+  if (!formData.password) {
+    setFormError((prev) => ({ ...prev, passwordError: "border-red-500" }));
+    return;
+  }
+
+  try {
+    const res = await axios.post("http://localhost:8000/auth/login", formData);
+         tostifyMsg('sucess' , 'Login sucess')
+  } catch (err) {
+     tostifyMsg('error' , err.response.data)
+  }
+};
 
   return (
     <>

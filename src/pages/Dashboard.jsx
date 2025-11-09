@@ -19,35 +19,14 @@ import { Pagination } from "antd";
 import axios from "axios";
 
 import Cookies from 'js-cookie';
+import { useNavigate } from "react-router";
 
 
 const Dashboard = () => {
- 
+ const navigate = useNavigate()
 
 
 
-
-
-
-
-
-
-
-
-
-  useEffect(()=>{
-  axios.get('http://localhost:8000/dashboard/dashbaord-report', {
-    headers: {
-      Authorization: `Bearer ${Cookies.get('token')} `  // send token in header
-    }
-  })
-  .then((res)=>{
-    console.log(res)
-  })
-  .catch((err)=>{
-    console.log(err)
-  })
-  },[])
 
 
 

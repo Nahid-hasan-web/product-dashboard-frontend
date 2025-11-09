@@ -7,7 +7,6 @@ import {
   RouterProvider,
 } from "react-router";
 import LayoutOne from "./layouts/LayoutOne";
-import ProductDetails from "./components/ProductDetails";
 import AddProductPage from "./pages/AddProductPage";
 import ProductPage from "./pages/ProductPage";
 import AllProductPage from "./pages/AllProductPage";

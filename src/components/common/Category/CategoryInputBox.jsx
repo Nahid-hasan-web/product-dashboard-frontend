@@ -19,7 +19,7 @@ export default function UploadCategory() {
     try {
       // const categoryData = await catgoryApi.addCategory(formData);
 
-      const categoryData = await axios.post('http://localhost:8000/category/addCatagory' , formData);
+      const categoryData = await catgoryApi.addCategory(formData);
       console.log(categoryData);
     } catch (err) {
       console.log(err);

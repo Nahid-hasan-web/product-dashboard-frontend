@@ -4,7 +4,7 @@ export const catgoryApi = {
   getCagory: () => {
     return api.get("/category/getAllCagegory");
   },
-  addCategory: ({ categoryInfo }) => {
+  addCategory: ( categoryInfo) => {
     return api.post(
       "/category/addCatagory",
       categoryInfo,

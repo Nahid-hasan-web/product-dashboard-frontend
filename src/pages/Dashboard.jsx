@@ -15,23 +15,14 @@ import CommonHead from "../components/common/CommonHead";
 import BreadCrumb from "../components/common/BreadCrumb";
 import OrderHead from "../components/common/OrderHead";
 import SingelOrderinfo from "../components/common/SingelOrderinfo";
-import { Pagination } from "antd";
-import axios from "axios";
-
-import Cookies from 'js-cookie';
 import { useNavigate } from "react-router";
-
-
+import DailySalesReport from "../components/dashboard/charts/DailySalesReport";
+import MounthlySalesReport from "../components/dashboard/charts/MounthlySalesReport";
+import CancelOrderRatio from "../components/dashboard/charts/CancelOrderRatio";
 const Dashboard = () => {
- const navigate = useNavigate()
+  const navigate = useNavigate();
 
 
-
-
-
-
-
-  
   return (
     <div
       className="min-h-screen p-4 sm:p-6 lg:p-8 antialiased"
@@ -77,27 +68,10 @@ const Dashboard = () => {
       </section>
       {/* --------------- dashboard charts */}
       <div className="grid grid-cols-5 grid-rows-5 gap-5   h-[700px]">
-        <div className="col-span-3 row-span-2  bg-white  p-4   rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
-          <h2 className="text-lg font-medium font-poppins text-secend">
-            Daily sales Report
-          </h2>
-        </div>
-        <div className="col-span-2 row-span-2 col-start-4  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
-          <h2 className="text-lg font-medium font-poppins text-secend">
-            Mounthly sell Unite Report
-          </h2>
-          
-        </div>
-        <div className="row-span-2 col-start-4 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
-          <h2 className="text-lg font-medium font-poppins text-secend">
-            Cancel orders ratio
-          </h2>
-        </div>
-        <div className="col-span-3 row-span-3 col-start-1 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
-          <h2 className="text-lg font-medium font-poppins text-secend">
-            Mounthly sales report
-          </h2>
-        </div>
+        <DailySalesReport/>
+        <MounthlySalesReport/>
+        <CancelOrderRatio/>
+       
         <div className="row-span-3 col-start-5 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Top selling product

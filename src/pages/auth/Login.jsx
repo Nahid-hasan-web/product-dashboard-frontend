@@ -5,7 +5,8 @@ import { IoEyeOutline } from "react-icons/io5";
 import axios from "axios";
 import tostifyMsg from "../../helpers/totstifyMsg";
 import { BeatLoader } from "react-spinners";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
+import { loginUser } from "../../api/authApi";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -18,7 +19,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handelSubmit = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
 
     // make sure formData is defined
@@ -32,19 +33,16 @@ const Login = () => {
       return;
     }
     try {
-      const res = await axios.post(
-        "http://localhost:8000/auth/login",
-        formData
-      );
-      tostifyMsg("sucess", "Login sucess");
-      navigate("/");
-      setLoading(false);
-      Cookies.set('token' , res.data.accessToken)
-      console.log(res)
+    const apiData =   await loginUser(formData);
+    tostifyMsg('info' , 'login sucess')
+    setLoading(false);
+    Cookies.set('token' , apiData.data.accessToken)
+    navigate('/')
 
     } catch (err) {
-      tostifyMsg("error", err.response.data);
-      setLoading(false);
+      console.log(err)
+    setLoading(false);
+
     }
   };
 
@@ -121,35 +119,22 @@ const Login = () => {
             >
               forgot password?
             </Link>
-            {loading ?  (
+            {loading ? (
               <div
                 type="submit"
                 className="w-full text-center active:scale-[1.1] duration-[4s] py-2.5 sm:py-3 mt-2 sm:mt-4 bg-brandColor text-white rounded-lg font-medium hover:bg-opacity-90 transition-colors text-sm sm:text-base"
               >
                 <BeatLoader size={10} color="#fff" />
               </div>
-            )
-            :
-            (
+            ) : (
               <button
                 type="submit"
                 className="w-full active:scale-[1.1] duration-[4s] py-2.5 sm:py-3 mt-2 sm:mt-4 bg-brandColor text-white rounded-lg font-medium hover:bg-opacity-90 transition-colors text-sm sm:text-base"
               >
                 Login
               </button>
-            ) 
-          }
+            )}
           </form>
-
-          <p className="mt-4 sm:mt-6 text-center text-gray-600 text-sm sm:text-base">
-            Don't have an account?{" "}
-            <Link
-              to="/register"
-              className="text-brandColor font-medium hover:underline"
-            >
-              Register
-            </Link>
-          </p>
         </div>
       </div>
     </>

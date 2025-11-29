@@ -19,7 +19,7 @@ const ProductPage = () => {
         <div className="mt-5 flex gap-5 flex-wrap  ">
           <CommonProductOptin
             cardIcon={
-              <CiViewList className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
+              <CiViewList className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-green-400" />
             }
             cardcontent={"Add catagory"}
             cardLink={"/"}
@@ -41,14 +41,14 @@ const ProductPage = () => {
         <div className="mt-5 flex gap-5 flex-wrap  ">
           <CommonProductOptin
             cardIcon={
-              <BiCategory className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
+              <BiCategory className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-blue-400" />
             }
             cardcontent={"View catagory"}
             cardLink={"/"}
           />
           <CommonProductOptin
             cardIcon={
-              <CiShop className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
+              <CiShop className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-[#FB7BB8]" />
             }
             cardcontent={"View Product"}
             cardLink={"/allProduct"}
@@ -56,7 +56,7 @@ const ProductPage = () => {
           />
           <CommonProductOptin
             cardIcon={
-              <VscInbox className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-yellow-400" />
+              <VscInbox className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-[#50D1B2]" />
             }
             cardcontent={"Manage Product"}
             cardLink={"/manage-prouduct"}

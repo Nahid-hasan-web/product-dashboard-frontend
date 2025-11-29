@@ -17,6 +17,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import { ToastContainer } from "react-toastify";
 import Dashboard from "./pages/Dashboard";
+import Category from "./pages/Category";
 const App = () => {
   const myRoute = createBrowserRouter(
     createRoutesFromElements(
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/manage-prouduct" element={<ManageProduct />} />
           <Route path="/all-orders" element={<OrderPage />} />
           <Route path="/client-list" element={<ClientsListPage />} />
+          <Route path="/category" element={<Category />} />
         </Route>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>

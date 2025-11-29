@@ -6,7 +6,7 @@ const CommonProductOptin = ({cardcontent , cardLink , cardIcon , cardColor}) => 
     <>
         <Link
           to={cardLink}
-          className={`w-[400px] h-[200px] bg-white rounded-2xl shadow-md flex flex-col items-center justify-center relative overflow-hidden border border-transparent hover:${cardColor} hover:bg-yellow-50 transition-all duration-400 group`}
+          className={`w-[400px] h-[200px] bg-white rounded-2xl shadow-md flex flex-col items-center justify-center relative overflow-hidden border border-transparent ${cardColor} transition-all duration-400 group`}
         >
           {/* Icon */}
           {cardIcon}

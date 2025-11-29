@@ -28,18 +28,8 @@ const Navbar = () => {
       navbarLink: "/all-orders",
     },
     {
-      navbarIcon: <CiCreditCard2 className="text-xl" />,
-      navbarContent: "Payments",
-      navbarLink: "/payments",
-    },
-    {
-      navbarIcon: <LuRefreshCw className="text-xl" />,
-      navbarContent: "Transactions",
-      navbarLink: "/transactions",
-    },
-    {
       navbarIcon: <BsPeople className="text-xl" />,
-      navbarContent: "Clients",
+      navbarContent: "Customer List",
       navbarLink: "/client-list",
     },
   ];
@@ -174,7 +164,7 @@ const Navbar = () => {
 
             {/* Add Category Button */}
             <Link
-              to={"/"}
+              to={"/category"}
               onClick={closeMobileMenu}
               className="flex gap-3 items-center text-[12px] font-semibold font-poppins text-[#07070C] py-[17px] pl-[21px] hover:bg-brandColor rounded-[10px] hover:text-[#fff] group duration-[.4s] mt-2"
             >

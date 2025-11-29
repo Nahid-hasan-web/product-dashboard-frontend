@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
-  FiSearch,
-  FiUser,
   FiShoppingCart,
   FiDollarSign,
   FiUsers,
   FiBox,
-  FiMoreVertical,
-  FiBell,
-  FiChevronDown,
 } from "react-icons/fi";
 import StatCard from "../components/common/StatCard";
 import CommonHead from "../components/common/CommonHead";

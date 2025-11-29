@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsPeople } from "react-icons/bs";
 import { CgAddR } from "react-icons/cg";
-import { CiCreditCard2, CiShop, CiViewList } from "react-icons/ci";
-import { LuLayoutList, LuRefreshCw } from "react-icons/lu";
-import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import {  CiShop, CiViewList } from "react-icons/ci";
+import { LuLayoutList,  } from "react-icons/lu";
+import {  HiOutlineX } from "react-icons/hi";
 import { Link, NavLink } from "react-router";
 import { IoIosArrowForward } from "react-icons/io";
-import { MdArrowDropDown } from "react-icons/md";
+import { catgoryApi } from "../api/categoryApi";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
@@ -34,38 +34,6 @@ const Navbar = () => {
     },
   ];
 
-  const categoryItem = [
-    {
-      categoryName: "Laptops",
-      categoryLink: "Laptops",
-      categoryQty: "8",
-      categoryColor: "bg-[#ECE663]",
-    },
-    {
-      categoryName: "Mobile phones",
-      categoryLink: "Mobile phones",
-      categoryQty: "6",
-      categoryColor: "bg-[#EC8C56]",
-    },
-    {
-      categoryName: "Desktops",
-      categoryLink: "Desktops",
-      categoryQty: "5",
-      categoryColor: "bg-[#FB7BB8]",
-    },
-    {
-      categoryName: "Accessories",
-      categoryLink: "Accessories",
-      categoryQty: "",
-      categoryColor: "",
-    },
-    {
-      categoryName: "Accessories",
-      categoryLink: "Accessories",
-      categoryQty: "7",
-      categoryColor: "bg-[#50D1B2]",
-    },
-  ];
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -75,6 +43,23 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+    const [categorys , setCategorys] =  useState([])
+  
+  
+    // ---- getting product category 
+    useEffect(  ()=>{
+      const fetchCategory = async ()=>{
+  
+        try{
+          const categoryData = await catgoryApi.getCagory()
+          setCategorys(categoryData.data.categorys)
+        }catch(err){
+          console.log(err)
+        }
+      }
+      fetchCategory()
+    },[])
+  
   return (
     <>
       {/* Main Navbar */}
@@ -138,28 +123,25 @@ const Navbar = () => {
               Categories
             </h2>
             <div className="space-y-1">
-              {categoryItem.map((item, index) => (
-                <NavLink
-                  key={index}
-                  to={item.categoryLink}
-                  onClick={closeMobileMenu}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "py-[17px] pl-[21px] pr-[15px] text-sm font-semibold font-poppins text-[#fff] bg-brandColor flex rounded-[17px] justify-between items-center transition-all duration-200"
-                      : "py-[17px] pl-[21px] pr-[15px] text-sm font-semibold font-poppins text-secend flex rounded-[17px] justify-between items-center hover:bg-gray-50 transition-all duration-200"
-                  }
+              {
+                categorys.map((item)=>(
+                <div
+                key={item._id}
+                  className='py-[17px] pl-[21px] pr-[15px] text-sm font-semibold font-poppins text-secend flex rounded-[17px] justify-between items-center hover:bg-gray-50 transition-all duration-200'
                 >
-                  <span className="truncate flex-1">{item.categoryName}</span>
-                  {item.categoryQty && (
+                  <span className="truncate flex-1">{item.catagoryName}</span>
                     <div
-                      className={`w-[18px] h-[18px] rounded-[4px] flex justify-center items-center text-[11px] font-medium font-poppins text-[#07070C] flex-shrink-0 ml-2
-                    ${item.categoryColor}`}
+                      className={`w-[18px] h-[18px] rounded-[4px] flex justify-center items-center text-[11px] font-medium font-poppins text-[#07070C] flex-shrink-0 ml-2 bg-yellow-500`}
                     >
-                      {item.categoryQty}
+                      {
+                        item.totalProducts
+                      }
                     </div>
-                  )}
-                </NavLink>
-              ))}
+             
+                </div>
+
+                ))
+              }
             </div>
 
             {/* Add Category Button */}

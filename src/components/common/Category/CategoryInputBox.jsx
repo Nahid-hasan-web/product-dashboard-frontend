@@ -3,8 +3,7 @@ import { BsUpload } from "react-icons/bs";
 import { catgoryApi } from "../../../api/categoryApi";
 import axios from "axios";
 
-const MAX_FILE_SIZE_MB = 5;
-const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+
 
 export default function UploadCategory() {
   const [catagoryName, setCategoryName] = useState("");
@@ -16,14 +15,11 @@ export default function UploadCategory() {
     console.log(image);
     const formData = new FormData();
     formData.append("productImage", image);
-    axios.post("http://localhost:8000/category/addCatagory", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
 
     try {
-      const categoryData = await catgoryApi.addCategory(formData);
+      // const categoryData = await catgoryApi.addCategory(formData);
+
+      const categoryData = await axios.post('http://localhost:8000/category/addCatagory' , formData);
       console.log(categoryData);
     } catch (err) {
       console.log(err);

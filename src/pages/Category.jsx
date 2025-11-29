@@ -4,28 +4,23 @@ import BreadCrumb from "../components/common/BreadCrumb";
 import CategoryInputBox from "../components/common/Category/CategoryInputBox";
 import Categorylist from "../components/common/Category/Categorylist";
 import { catgoryApi } from "../api/categoryApi";
+import axios from "axios";
 
 const Category = () => {
-  const [categorys , setCategorys] =  useState([])
+  const [categorys, setCategorys] = useState([]);
 
-
-  // ---- getting product category 
-  useEffect(  ()=>{
-    const fetchCategory = async ()=>{
-
-      try{
-        const categoryData = await catgoryApi.getCagory()
-        setCategorys(categoryData.data.categorys)
-      }catch(err){
-        console.log(err)
+  // ---- getting product category
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const categoryData = await catgoryApi.getCagory();
+        setCategorys(categoryData.data.categorys);
+      } catch (err) {
+        console.log(err);
       }
-    }
-    fetchCategory()
-  },[])
-
-
-
-
+    };
+    fetchCategory();
+  }, []);
 
   return (
     <>
@@ -34,7 +29,7 @@ const Category = () => {
         <BreadCrumb pageName={"Add Category"} />
         <div className="flex flex-wrap mt-5 gap-5">
           <CategoryInputBox />
-          <Categorylist categoryItems={categorys}/>
+          <Categorylist categoryItems={categorys} />
         </div>
       </section>
     </>

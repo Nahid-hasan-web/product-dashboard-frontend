@@ -11,4 +11,8 @@ export const catgoryApi = {
       { headers: { "Content-Type": "multipart/form-data" } }
     );
   },
+  deleteCategory:(categoryId)=>{
+    
+    return api.delete('/category/deleteCategory' ,{data:{categoryId}})
+  }
 };

@@ -22,7 +22,7 @@ const ProductPage = () => {
               <CiViewList className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-green-400" />
             }
             cardcontent={"Add catagory"}
-            cardLink={"/"}
+            cardLink={"/category"}
           />
           <CommonProductOptin
             cardIcon={

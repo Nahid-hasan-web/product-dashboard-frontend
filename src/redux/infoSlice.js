@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 export const infoSlice = createSlice({
   name: 'counter',
   initialState: {
-    userInfo: 0,
+    userInfo:JSON.parse(localStorage.getItem('userInfo')) || null,
   },
   reducers: {
     userInfoReducer: (state, action) => {
-      state.value = action.payload
+      state.userInfo = action.payload
     },
   },
 })

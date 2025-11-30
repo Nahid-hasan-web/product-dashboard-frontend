@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
-import axios from "axios";
-import tostifyMsg from "../../helpers/totstifyMsg";
 import { BeatLoader } from "react-spinners";
 import Cookies from "js-cookie";
 import { loginUser } from "../../api/authApi";
+import tostifyMsg from "../../helpers/tostifyMsg";
+import { useDispatch } from "react-redux";
+import { userInfoReducer } from "../../redux/infoSlice";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -17,6 +18,8 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
 
   const handelSubmit = async (e) => {
     setLoading(true);
@@ -33,15 +36,18 @@ const Login = () => {
       return;
     }
     try {
-    const apiData =   await loginUser(formData);
-    tostifyMsg('info' , 'login sucess')
-    setLoading(false);
-    Cookies.set('token' , apiData.data.accessToken)
-    navigate('/')
-
+      const apiData =   await loginUser(formData);
+      tostifyMsg('info' , 'login sucess')
+      setLoading(false);
+      Cookies.set('token' , apiData.data.accessToken)
+      localStorage.setItem('userInfo' , JSON.stringify(apiData.data.userInfo))
+      dispatch(userInfoReducer(apiData.data.userInfo))
+      navigate('/')
+    
     } catch (err) {
-      console.log(err)
-    setLoading(false);
+      
+      setLoading(false);
+      tostifyMsg('error' , err.response.data )
 
     }
   };

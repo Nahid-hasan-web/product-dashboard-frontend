@@ -4,6 +4,7 @@ import { CiImageOn } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { productApi } from "../api/productApi";
 import tostifyMsg from "../helpers/tostifyMsg";
+import { catgoryApi } from "../api/categoryApi";
 
 const PorductUploadBoard = () => {
   const [varientArray, setVarientsArray] = useState([]);
@@ -21,11 +22,15 @@ const PorductUploadBoard = () => {
     price: "",
     discountPercent: "",
     tags: [],
+    categoryId:''
   });
   const [varients, setVarients] = useState({
     varientName: "",
     varientPrice: "",
   });
+
+  const [category , setCategory]= useState([])
+
 
   const handelUpload = async () => {
     if 
@@ -38,6 +43,8 @@ const PorductUploadBoard = () => {
       !subImageFiles
     )
       return tostifyMsg("warning", "all fild required");
+
+      
     setLoader(true)
     const productsForm = new FormData();
     productsForm.append("title", formData.title);
@@ -48,15 +55,13 @@ const PorductUploadBoard = () => {
     productsForm.append("tags", formData.tags);
     productsForm.append("varients", JSON.stringify(varients));
     productsForm.append("thumbnail", thumbnailFile);
-    productsForm.append("categoryId", "68ea5b885cfadfc1acd606cc");
+    productsForm.append("categoryId", formData.categoryId);
 
     subImageFiles.forEach((file) => {
       productsForm.append("subImages", file);
     });
 
-    console.log(thumbnailFile instanceof File); // TRUE
-    console.log(subImageFiles);
-
+    
     try {
       const apiData = await productApi.addProduct(productsForm);
       console.log(apiData);
@@ -68,6 +73,18 @@ const PorductUploadBoard = () => {
       console.log(err);
     }
   };
+
+  // ---------------- getting category 
+  useEffect(()=>{
+    const apiFun =async ()=>{
+      const apiData =  await catgoryApi.getCagory()
+      setCategory(apiData.data.categorys )
+    }
+
+    apiFun()
+  },[])
+
+  console.log(category)
 
   return (
     <>
@@ -108,12 +125,14 @@ const PorductUploadBoard = () => {
               <IoMdArrowDropdown className=" absolute top-[60%] right-4 text-xl text-secend z-10" />
               <select
                 className="w-full relative lg:w-[527px]  duration-[.4s] h-[48px] rounded-[8px] border border-[#E8EDF2] mt-[10px] inputText focus-within:border-brandColor appearance-none"
-                name=""
-                id=""
+                onChange={(e)=>setFormData((prev)=>({...prev , categoryId:e.target.value}))}
               >
-                <option value="">Select Catagory</option>
-                <option value="">T-shirt</option>
-                <option value="">Panjabi</option>
+              {
+                category.map((item)=>(
+                  <option key={item._id} value={item._id}>{item.catagoryName}</option>
+                ))
+              }
+                
               </select>
             </div>
             {/* --------------- product tags and stock info  */}

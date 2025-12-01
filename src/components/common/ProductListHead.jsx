@@ -21,9 +21,6 @@ const ProductListHead = () => {
         <h2 className=" w-[24px]  text-[12px] font-poppins font-semibold text-secend ">
           QTY
         </h2>
-        <h2 className=" w-[72px]  text-[12px] font-poppins font-semibold text-secend ">
-          Rating
-        </h2>
         <h2 className=" w-[80px]  text-[12px] font-poppins font-semibold text-secend ">
           Sale
         </h2>

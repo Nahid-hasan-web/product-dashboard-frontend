@@ -12,49 +12,31 @@ const OrderPage = () => {
   const items = [
     {
       key: "1",
-      label: "My Account",
-      disabled: true,
-    },
-    {
-      type: "divider",
-    },
-    {
-      key: "2",
-      label: "Profile",
-      extra: "⌘P",
-    },
-    {
-      key: "3",
-      label: "Billing",
-      extra: "⌘B",
-    },
-    {
-      key: "4",
-      label: "Settings",
-      // icon: <SettingOutlined/>,
-      extra: "⌘S",
+      label: "This week",
     },
   ];
 
-  const [orderList , setOrderList] = useState([])
+  const [orderList, setOrderList] = useState([]);
+
+  const [date, setDate] = useState();
+
   useEffect(() => {
     const orderFun = async () => {
       try {
-        const apiData = await orderApi.getOrderList();
-        setOrderList(apiData.data)
+        const startDate = Array.isArray(date) ? date[0] : null
+        const endDate = Array.isArray(date) ? date[1] : null
+        const apiData = await orderApi.getOrderList(startDate , endDate);
+        setOrderList(apiData.data);
       } catch (err) {
         console.log(err);
       }
     };
-    orderFun()
-  }, []);
-
-
-  console.log(orderList)
+    orderFun();
+  }, [date]);
+  
 
   return (
     <>
-    
       <div className="px-[23px] py-[42px]">
         <CommonHead CommonHead_content={"All Orders"} />
         <BreadCrumb pageName={"All Orders"} pageLink={"/all-orders"} />
@@ -66,7 +48,7 @@ const OrderPage = () => {
             >
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
-                  All Category
+                  Filter By
                   {/* <DownOutlined /> */}
                 </Space>
               </a>
@@ -78,23 +60,12 @@ const OrderPage = () => {
             {/* --- select date range */}
             <div className="relative">
               <Space direction="vertical" size={12}>
-                <RangePicker />
+                <RangePicker
+                  onChange={(date, dateString) => {
+                    setDate(dateString);
+                  }}
+                />
               </Space>
-            </div>
-            {/* ------------------ deleviry status*/}
-            <div className="relative w-fit">
-              <Dropdown
-                className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]"
-                menu={{ items }}
-              >
-                <a onClick={(e) => e.preventDefault()}>
-                  <Space>
-                    All Category
-                    {/* <DownOutlined /> */}
-                  </Space>
-                </a>
-              </Dropdown>
-              <MdOutlineArrowDropDown className=" absolute top-[50%] translate-y-[-50%] text-secend right-5" />
             </div>
           </div>
         </div>
@@ -111,19 +82,23 @@ const OrderPage = () => {
             five={"Delivery Status"}
             six={"Price"}
           />
-          {
-          orderList?.data?.map((item ,i) => (
-            <SingelOrderinfo  key={item._id}
-             orderId={item.orderNo}
-            customerName={item.customerName}
-            paymentMethod={'Cash on Delivery'}
-            date={item.orderDate.split('T')[0]}
-            status={item.deliveryStatus}
-            total={item.totalAmmount}
-             />
+          {orderList?.data?.map((item, i) => (
+            <SingelOrderinfo
+              key={item._id}
+              orderId={item.orderNo}
+              customerName={item.customerName}
+              paymentMethod={"Cash on Delivery"}
+              date={item.orderDate.split("T")[0]}
+              status={item.deliveryStatus}
+              total={item.totalAmmount}
+            />
           ))}
           <br />
-          <Pagination align="end" defaultCurrent={1} total={orderList.totalOrder} />
+          <Pagination
+            align="end"
+            defaultCurrent={1}
+            total={orderList.totalOrder}
+          />
         </div>
       </div>
     </>

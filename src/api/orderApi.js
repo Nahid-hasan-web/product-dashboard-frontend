@@ -8,7 +8,9 @@ export const orderApi = {
       params.startDate = startDate;
       params.endDate = endDate;
     }
-    console.log(startDate ,endDate , params)
     return api.get("http://localhost:8000/order/get-orders", { params });
   },
+  getcustomerList:()=>{
+    return api.get('http://localhost:8000/order/get-cutomer-list')
+  }
 };

@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react'
 
-const OrderHead = ({ one, two, three, five, six }) => {
+const CustomerList = ({ one, two, three, five, six }) => {
   return (
-    <div className="w-full  rounded-[5px] py-[13px] bg-gray-100 px-2">
+    <>
+     <div className="w-full  rounded-[5px] py-[13px] border-b border-b-gray-300  px-2">
       <div className="flex items-center gap-4 text-[#9A9AAF] text-base font-normal font-poppins">
         {/* Checkbox - 18x18 and colored */}
         <div className="flex items-center">
@@ -19,11 +20,13 @@ const OrderHead = ({ one, two, three, five, six }) => {
           <span className="min-w-[300px]">{two}</span>
           <span className="min-w-[180px]">{three}</span>
           <span className="min-w-[150px]">{five}</span>
-          <span className="min-w-[100px]">{six}</span>
+          <span className="min-w-[100px]">{six} Tk</span>
         </div>
       </div>
     </div>
-  );
-};
 
-export default OrderHead;
+    </>
+  )
+}
+
+export default CustomerList

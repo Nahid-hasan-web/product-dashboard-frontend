@@ -1,95 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CommonHead from "../components/common/CommonHead";
 import BreadCrumb from "../components/common/BreadCrumb";
 import ProductListHead from "../components/common/ProductListHead";
 import OrderHead from "../components/common/OrderHead";
-import { MdOutlineArrowDropDown } from "react-icons/md";
 import { Dropdown, Space, DatePicker, Pagination } from "antd";
-import SingelOrderinfo from "../components/common/SingelOrderinfo";
-const { RangePicker } = DatePicker;
+import { orderApi } from "../api/orderApi";
+import CustomerList from "../components/common/CustomerList";
 
 const ClientsListPage = () => {
-  const items = [
-    {
-      key: "1",
-      label: "My Account",
-      disabled: true,
-    },
-    {
-      type: "divider",
-    },
-    {
-      key: "2",
-      label: "Profile",
-      extra: "⌘P",
-    },
-    {
-      key: "3",
-      label: "Billing",
-      extra: "⌘B",
-    },
-    {
-      key: "4",
-      label: "Settings",
-      // icon: <SettingOutlined/>,
-      extra: "⌘S",
-    },
-  ];
+    const [customerList , setCustomerList] = useState(null)
+
+  useEffect(()=>{
+  try{
+      const apiFun = async ()=>{
+       const apiData =  await orderApi.getcustomerList()
+      setCustomerList(apiData.data.data)
+      }
+
+    apiFun()
+  }catch(err){
+    console.log(err)
+  }
+  },[])
+
+  console.log(customerList)
+
   return (
     <>
       <div className="px-[23px] py-[42px]">
-        <CommonHead CommonHead_content={"All Orders"} />
+        <CommonHead CommonHead_content={"Customer List"} />
         <BreadCrumb pageName={"All Customer list"} pageLink={"/client-list"} />
         <div className="flex justify-between items-center mt-[26px]">
-          <div className="relative">
-            <Dropdown
-              className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]"
-              menu={{ items }}
-            >
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  All Category
-                  {/* <DownOutlined /> */}
-                </Space>
-              </a>
-            </Dropdown>
-            <MdOutlineArrowDropDown className=" absolute top-[50%] translate-y-[-50%] text-secend right-5" />
-          </div>
-          {/* ------------------------------- filter options */}
-          <div className="flex flex-wrap gap-[12px] items-center">
-            {/* --- select date range */}
-            <div className="relative">
-              <Space direction="vertical" size={12}>
-                <RangePicker />
-              </Space>
-            </div>
-            {/* ------------------ deleviry status*/}
-            <div className="relative w-fit">
-              <Dropdown
-                className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]"
-                menu={{ items }}
-              >
-                <a onClick={(e) => e.preventDefault()}>
-                  <Space>
-                    All Category
-                  </Space>
-                </a>
-              </Dropdown>
-              <MdOutlineArrowDropDown className=" absolute top-[50%] translate-y-[-50%] text-secend right-5" />
-            </div>
-          </div>
         </div>
         {/* --------------- order list */}
         <div className="w-full p-[25px] mt-[18px] bg-white rounded-[16px]">
           <h2 className="text-base  font-poppins font-semibold text-[#07070C] mb-4">
             Recent Orders
           </h2>
-          <OrderHead one={'Order No'} two={'Name'} three={'Email'} four={'Join data'} five={'Status'} six={'Total amound'} />
-          {[1, 2, 3, 4, 5, 6, 7].map((item) => (
-            <SingelOrderinfo />
+          <OrderHead one={'#Customer'} two={'Name'} three={'Email'} four={'Join data'} five={'Total Order'} six={'Total amound'} />
+          {customerList?.map((item , i) => (
+            <CustomerList key={i} one={i +1} two={item.customerName} three={item.email} five={item.totalOrders} six={item.totalPurchase} />
           ))}
-          <br />
-          <Pagination align="end" defaultCurrent={6} total={500} />
         </div>
       </div>
     </>

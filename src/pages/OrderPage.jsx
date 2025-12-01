@@ -7,14 +7,9 @@ import { Dropdown, Space, DatePicker, Pagination } from "antd";
 import SingelOrderinfo from "../components/common/SingelOrderinfo";
 import { orderApi } from "../api/orderApi";
 const { RangePicker } = DatePicker;
+import { CiFaceFrown } from "react-icons/ci";
 
 const OrderPage = () => {
-  const items = [
-    {
-      key: "1",
-      label: "This week",
-    },
-  ];
 
   const [orderList, setOrderList] = useState([]);
 
@@ -42,17 +37,7 @@ const OrderPage = () => {
         <BreadCrumb pageName={"All Orders"} pageLink={"/all-orders"} />
         <div className="flex justify-between items-center mt-[26px]">
           <div className="relative">
-            <Dropdown
-              className="w-[225px] inline-block text-sm font-poppins font-normal  appearance-none outline-brandColor duration-[.4s] text-secend rounded-[8px] border border-[#E8EDF2] bg-white px-[16px] py-[15px]"
-              menu={{ items }}
-            >
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  Filter By
-                  {/* <DownOutlined /> */}
-                </Space>
-              </a>
-            </Dropdown>
+           
             <MdOutlineArrowDropDown className=" absolute top-[50%] translate-y-[-50%] text-secend right-5" />
           </div>
           {/* ------------------------------- filter options */}
@@ -82,7 +67,11 @@ const OrderPage = () => {
             five={"Delivery Status"}
             six={"Price"}
           />
-          {orderList?.data?.map((item, i) => (
+          {
+            orderList?.data?.length == 0?
+            <div className="flex justify-center items-center py-[100px] text-2xl font-bold text-secend flex-wrap gap-5"><CiFaceFrown className="text-6xl"/>No order found</div>
+            :
+            orderList?.data?.map((item, i) => (
             <SingelOrderinfo
               key={item._id}
               orderId={item.orderNo}
@@ -92,7 +81,9 @@ const OrderPage = () => {
               status={item.deliveryStatus}
               total={item.totalAmmount}
             />
-          ))}
+          ))
+          
+          }
           <br />
           <Pagination
             align="end"

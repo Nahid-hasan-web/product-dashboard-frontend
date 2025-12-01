@@ -2,30 +2,72 @@ import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { CiImageOn } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
+import { productApi } from "../api/productApi";
+import tostifyMsg from "../helpers/tostifyMsg";
 
 const PorductUploadBoard = () => {
-  const [varientArray , setVarientsArray] = useState([]);
-  const [imgPath, setImgPath] = useState("");
-  const [subImage, setSubImage] = useState([]);
-  
+  const [varientArray, setVarientsArray] = useState([]);
+  const [thumbnailFile, setThumbnailFile] = useState(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState("");
+
+  const [subImageFiles, setSubImageFiles] = useState([]);
+  const [subImagePreview, setSubImagePreview] = useState([]);
+
+  const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     stock: "",
     price: "",
     discountPercent: "",
+    tags: [],
   });
   const [varients, setVarients] = useState({
     varientName: "",
     varientPrice: "",
   });
 
-  const handelUpload = () => {
-    console.log(varientArray);
-    console.log(formData, varientArray);
-  };
+  const handelUpload = async () => {
+    if 
+      (!formData.title||
+      !formData.description||
+      !formData.stock||
+      !formData.price||
+      !formData.discountPercent||
+      !thumbnailFile||
+      !subImageFiles
+    )
+      return tostifyMsg("warning", "all fild required");
+    setLoader(true)
+    const productsForm = new FormData();
+    productsForm.append("title", formData.title);
+    productsForm.append("description", formData.description);
+    productsForm.append("stock", formData.stock);
+    productsForm.append("price", formData.price);
+    productsForm.append("discountPercent", formData.discountPercent);
+    productsForm.append("tags", formData.tags);
+    productsForm.append("varients", JSON.stringify(varients));
+    productsForm.append("thumbnail", thumbnailFile);
+    productsForm.append("categoryId", "68ea5b885cfadfc1acd606cc");
 
-  
+    subImageFiles.forEach((file) => {
+      productsForm.append("subImages", file);
+    });
+
+    console.log(thumbnailFile instanceof File); // TRUE
+    console.log(subImageFiles);
+
+    try {
+      const apiData = await productApi.addProduct(productsForm);
+      console.log(apiData);
+      if(apiData){
+        setLoader(false)
+      }
+    } catch (err) {
+      setLoader(false)
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -74,7 +116,7 @@ const PorductUploadBoard = () => {
                 <option value="">Panjabi</option>
               </select>
             </div>
-            {/* --------------- product more info  */}
+            {/* --------------- product tags and stock info  */}
             <div className="w-fit flex flex-wrap gap-[23px] mt-[48px]">
               <div>
                 <h2 className="commonHead">Regular Price</h2>
@@ -84,7 +126,7 @@ const PorductUploadBoard = () => {
                   }
                   placeholder="$500"
                   className="w-[252px] h-[48px]  border border-[#E8EDF2] rounded-[8px] inputText"
-                  type="text"
+                  type="number"
                 />
               </div>
               <div>
@@ -98,7 +140,7 @@ const PorductUploadBoard = () => {
                   }
                   placeholder="8%"
                   className="w-[252px] h-[48px]  border border-[#E8EDF2] rounded-[8px] inputText"
-                  type="text"
+                  type="number"
                 />
               </div>
             </div>
@@ -111,7 +153,7 @@ const PorductUploadBoard = () => {
                   }
                   placeholder="200"
                   className="w-[252px] h-[48px]  border border-[#E8EDF2] rounded-[8px] inputText"
-                  type="text"
+                  type="number"
                 />
               </div>
               <div className=" w-fit  relative">
@@ -121,11 +163,17 @@ const PorductUploadBoard = () => {
                   className=" relative w-[252px]  duration-[.4s] h-[48px] rounded-[8px] border border-[#E8EDF2] inputText focus-within:border-brandColor appearance-none"
                   name=""
                   id=""
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      tags: [...prev.tags, e.target.value],
+                    }))
+                  }
                 >
                   <option value="">Select Tags</option>
-                  <option value="">New</option>
-                  <option value="">Offter</option>
-                  <option value="">Sale</option>
+                  <option value="new">New</option>
+                  <option value="offer">Offer</option>
+                  <option value="sale">Sale</option>
                 </select>
               </div>
             </div>
@@ -161,7 +209,7 @@ const PorductUploadBoard = () => {
               </div>
               <button
                 onClick={() => {
-                  setVarientsArray((prev)=>([...prev , varients]))
+                  setVarientsArray((prev) => [...prev, varients]);
                 }}
                 className="py-[10px] px-[24px] h-fit rounded-[8px]  text-sm font-semibold font-poppins  text-white bg-brandColor active:scale-[1.1]"
               >
@@ -169,13 +217,16 @@ const PorductUploadBoard = () => {
               </button>
             </div>
 
-            {
-            varientArray.length != 0 && (
-             
+            {varientArray.length != 0 && (
               <div className="w-[300px] p-2 border-borderColor rounded-[5px] flex justify-between items-center bg-borderColor mt-5">
-                {varientArray.map((item , i) => (
-                  <div key={i} className="flex items-center justify-between w-full border-b">
-                    <h2 className="text-base font-medium  text-secend">{item.varientName}</h2>
+                {varientArray.map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between w-full border-b"
+                  >
+                    <h2 className="text-base font-medium  text-secend">
+                      {item.varientName}
+                    </h2>
                     <h2 className="text-base font-medium  text-secend">
                       {item.varientPrice} tk
                     </h2>
@@ -184,15 +235,18 @@ const PorductUploadBoard = () => {
               </div>
             )}
           </div>
-          {/* -------------- column 2 */}
+          {/* -------------- column 2 images*/}
           <div>
+            {/* ---------- thumbnail image */}
             <div
               className={`w-full lg:w-[503px]   ${
-                imgPath ? "border h-fit" : "border-4 border-dashed h-[463px] "
+                thumbnailPreview
+                  ? "border h-fit"
+                  : "border-4 border-dashed h-[463px] "
               } border-borderColor  rounded-[8px]  flex justify-center items-center overflow-hidden`}
             >
-              {imgPath ? (
-                <img src={imgPath} alt="thumbnail image" />
+              {thumbnailPreview ? (
+                <img src={thumbnailPreview} alt="thumbnail image" />
               ) : (
                 <label
                   htmlFor="thumbnailImage"
@@ -210,7 +264,8 @@ const PorductUploadBoard = () => {
                     onChange={(e) => {
                       const file = e.target.files[0];
                       if (file) {
-                        setImgPath(URL.createObjectURL);
+                        setThumbnailFile(file); // store real file
+                        setThumbnailPreview(URL.createObjectURL(file)); // preview for UI
                       }
                     }}
                     className="invisible"
@@ -223,7 +278,9 @@ const PorductUploadBoard = () => {
             <h2 className="commonHead mt-[48px]">Product Sub-Images</h2>
             <div
               className={`w-full lg:w-[503px]   ${
-                imgPath ? "border h-fit" : "border-4 border-dashed h-[154px] "
+                thumbnailPreview
+                  ? "border h-fit"
+                  : "border-4 border-dashed h-[154px] "
               } border-borderColor  rounded-[8px]  flex justify-center items-center overflow-hidden`}
             >
               <label
@@ -242,10 +299,11 @@ const PorductUploadBoard = () => {
                   onChange={(e) => {
                     const file = e.target.files[0];
                     if (file) {
-                      setSubImage((prev) => [
+                      setSubImageFiles((prev) => [...prev, file]); // real files
+                      setSubImagePreview((prev) => [
                         ...prev,
                         URL.createObjectURL(file),
-                      ]);
+                      ]); // UI preview
                     }
                   }}
                   className="invisible"
@@ -254,17 +312,27 @@ const PorductUploadBoard = () => {
                 />
               </label>
             </div>
-            {subImage.length > 0 && (
+            {subImagePreview.length > 0 && (
               <div>
                 <h2 className="commonHead mt-[48px]">preview</h2>
                 <div className="flex gap-5 flex-wrap items-center mt-5">
-                  {subImage.map((item, i) => (
+                  {subImagePreview.map((item, i) => (
                     <div
                       key={i}
                       className="w-[80px] h-[80px] rounded-[5px] bg-gray-100 relative group"
                     >
                       <img className="w-full" src={item} alt="sub images" />
-                      <button className="w-[20px] h-[20px] rounded-full bg-black flex justify-center items-center text-white text-sm absolute top-[-10px] right-0 duration-[.2s]  opacity-0 group-hover:opacity-100 active:scale-[1.1]">
+                      <button
+                        onClick={() => {
+                          setSubImageFiles((prev) =>
+                            prev.filter((_, index) => index !== i)
+                          );
+                          setSubImagePreview((prev) =>
+                            prev.filter((_, index) => index !== i)
+                          );
+                        }}
+                        className="w-[20px] h-[20px] rounded-full bg-black flex justify-center items-center text-white text-sm absolute top-[-10px] right-0 duration-[.2s]  opacity-0 group-hover:opacity-100 active:scale-[1.1]"
+                      >
                         <RxCross1 />
                       </button>
                     </div>
@@ -273,12 +341,22 @@ const PorductUploadBoard = () => {
               </div>
             )}
             <div className="flex gap-5 items-center mt-[58px]">
-              <button
-                onClick={handelUpload}
-                className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-white bg-brandColor active:scale-[1.1]"
-              >
-                Upload
-              </button>
+              {loader ? (
+                <button
+                  disabled
+                  className="px-5 py-1 active:scale-[1.1]  rounded-[5px] bg-brandColor text-lg font-medium  font-poppins text-white flex items-center gap-2"
+                >
+                  <span className="w-[20px] h-[20px] inline-block rounded-full border-4 border-[#e2e2e2c7] border-r-[#fff] animate-spin"></span>
+                  uploading
+                </button>
+              ) : (
+                <button
+                  onClick={handelUpload}
+                  className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-white bg-brandColor active:scale-[1.1]"
+                >
+                  Upload
+                </button>
+              )}
               <button className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-secend bg-gray-200 active:scale-[1.1]">
                 Reset
               </button>

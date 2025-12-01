@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { IoIosStar } from "react-icons/io";
 import { RxDotsHorizontal } from "react-icons/rx";
+import { productApi } from "../../api/productApi";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const SingelProductCart = ({
   image,
@@ -10,8 +13,34 @@ const SingelProductCart = ({
   status,
   qty,
   sale,
+  slug,
 }) => {
   const [showOption, setShowOption] = useState(false);
+  const navigate = useNavigate()
+  const currentUserInfo = useSelector((state) => state.reduxData.userInfo);
+  
+
+
+
+  const handelStatusUpdate = async (updateAproval)=>{
+    try{
+      
+    const apiData =  await productApi.updateStatus({slug,updateAproval})
+
+    console.log(apiData)
+    }catch(err){
+      if(err.response.data == 'Access token not found'){
+        navigate('/login')
+      }
+      console.log(err)
+    }
+
+  }
+
+
+
+
+
   return (
     <>
       {/* ----------------------- singel product imfo  */}
@@ -32,7 +61,7 @@ const SingelProductCart = ({
             <GoDotFill className="text-yellow-500" />
           ) : status === "active" ? (
             <GoDotFill className="text-green-500" />
-          ) : status === "cancel" ? (
+          ) : status === "reject" ? (
             <GoDotFill className="text-red-500" />
           ) : null}
           {status}
@@ -44,22 +73,26 @@ const SingelProductCart = ({
         <h2 className=" w-[80px]  text-[12px] font-poppins font-semibold text-[#07070C] ">
           20/45
         </h2>
-        <button
+        <div
           onClick={() => setShowOption(!showOption)}
-          className=" absolute top-[50%] translate-y-[-50%] right-0 "
+          className=" absolute top-[50%] translate-y-[-50%] right-0 z-20 "
         >
           <RxDotsHorizontal className="text-lg" />
-          {showOption && (
-            <div className="w-[60px] p-2  absolute  top-[100%] right-0 roudned-[15px] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] ">
-              <button className="text-sm font-poppins font-medium text-secend mb-5">
-                Active
-              </button>
-              <button className="text-sm font-poppins font-medium text-secend">
-                Reject
-              </button>
-            </div>
-          )}
-        </button>
+          {
+            currentUserInfo.userRole&&
+            
+            showOption && (
+              <div className="w-[60px] p-2  absolute  top-[100%] right-0 roudnded-[15px] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] ">
+                <button onClick={()=>handelStatusUpdate('active')} className="text-sm font-poppins font-medium text-secend mb-5">
+                  Active
+                </button>
+                <button  onClick={()=>handelStatusUpdate('reject')} className="text-sm font-poppins font-medium text-secend">
+                  Reject
+                </button>
+              </div>
+            )
+          }
+        </div>
       </div>
     </>
   );

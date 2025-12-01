@@ -14,8 +14,7 @@ const AllProductPage = () => {
   const handelPagination = (page,limit)=>{
     setPageLimit({page, limit })
   }
-
-
+  
 
   useEffect(() => {
     const apiFun = async () => {
@@ -41,7 +40,7 @@ const AllProductPage = () => {
         <div className="w-full p-[25px] rounded-[16px] bg-white mt-[18px] ">
           <ProductListHead />
           {products?.products?.map((item) => (
-            <SingelProductCart key={item._id} image={item.thumbnail} title={item.title} discountPrice={item.discontPrice} status={item.status} />
+            <SingelProductCart key={item._id} image={item.thumbnail} title={item.title} slug={item.slug} discountPrice={item.discontPrice} status={item.status} />
           ))}
           <div className="mt-12">
             <Pagination onChange={handelPagination} align="end" defaultCurrent={1} total={products.total} />

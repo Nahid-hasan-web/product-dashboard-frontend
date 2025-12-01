@@ -44,7 +44,7 @@ const ProductPage = () => {
               <BiCategory className="text-6xl text-gray-400 transition-transform duration-500 group-hover:scale-125 group-hover:text-blue-400" />
             }
             cardcontent={"View catagory"}
-            cardLink={"/"}
+            cardLink={"/category"}
           />
           <CommonProductOptin
             cardIcon={

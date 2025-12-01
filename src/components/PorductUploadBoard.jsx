@@ -4,8 +4,28 @@ import { CiImageOn } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 
 const PorductUploadBoard = () => {
+  const [varientArray , setVarientsArray] = useState([]);
   const [imgPath, setImgPath] = useState("");
   const [subImage, setSubImage] = useState([]);
+  
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    stock: "",
+    price: "",
+    discountPercent: "",
+  });
+  const [varients, setVarients] = useState({
+    varientName: "",
+    varientPrice: "",
+  });
+
+  const handelUpload = () => {
+    console.log(varientArray);
+    console.log(formData, varientArray);
+  };
+
+  
 
   return (
     <>
@@ -17,18 +37,27 @@ const PorductUploadBoard = () => {
             <div className=" ">
               <h2 className="commonHead">Product Name</h2>
               <input
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, title: e.target.value }))
+                }
                 type="text"
                 placeholder="Type name here"
                 className="w-full lg:w-[527px]  duration-[.4s] h-[48px] rounded-[8px] border border-[#E8EDF2] mt-[10px] inputText focus-within:border-brandColor"
               />
             </div>
-            {/* --------------- product name */}
-            <div className="mt-[48px] ">
-              <h2 className="commonHead">Product Name</h2>
-              <input
+            {/* --------------- product description */}
+            <div className=" ">
+              <h2 className="commonHead mt-5">Product Details</h2>
+              <textarea
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }))
+                }
                 type="text"
-                placeholder="Type name here"
-                className="w-full lg:w-[527px]  duration-[.4s] h-[48px] rounded-[8px] border border-[#E8EDF2] mt-[10px] inputText focus-within:border-brandColor"
+                placeholder="Type Details here"
+                className="w-full lg:w-[527px]  duration-[.4s] h-[400px] rounded-[8px] border border-[#E8EDF2] mt-[10px] inputText focus-within:border-brandColor"
               />
             </div>
             {/* --------------- product Catagory */}
@@ -50,6 +79,9 @@ const PorductUploadBoard = () => {
               <div>
                 <h2 className="commonHead">Regular Price</h2>
                 <input
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, price: e.target.value }))
+                  }
                   placeholder="$500"
                   className="w-[252px] h-[48px]  border border-[#E8EDF2] rounded-[8px] inputText"
                   type="text"
@@ -58,6 +90,12 @@ const PorductUploadBoard = () => {
               <div>
                 <h2 className="commonHead">Discount percentage ( If any)</h2>
                 <input
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      discountPercent: e.target.value,
+                    }))
+                  }
                   placeholder="8%"
                   className="w-[252px] h-[48px]  border border-[#E8EDF2] rounded-[8px] inputText"
                   type="text"
@@ -68,6 +106,9 @@ const PorductUploadBoard = () => {
               <div>
                 <h2 className="commonHead">Stock quantity</h2>
                 <input
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, stock: e.target.value }))
+                  }
                   placeholder="200"
                   className="w-[252px] h-[48px]  border border-[#E8EDF2] rounded-[8px] inputText"
                   type="text"
@@ -88,6 +129,60 @@ const PorductUploadBoard = () => {
                 </select>
               </div>
             </div>
+            {/* -------------- adding varients */}
+            <div className="w-fit flex flex-wrap gap-[23px] mt-[48px] items-end">
+              <div>
+                <h2 className="commonHead">Varent Name</h2>
+                <input
+                  onChange={(e) =>
+                    setVarients((prev) => ({
+                      ...prev,
+                      varientName: e.target.value,
+                    }))
+                  }
+                  placeholder="3XL"
+                  className="w-[252px] h-[48px]  border border-[#E8EDF2] rounded-[8px] inputText"
+                  type="text"
+                />
+              </div>
+              <div>
+                <h2 className="commonHead">Additinal Price</h2>
+                <input
+                  onChange={(e) =>
+                    setVarients((prev) => ({
+                      ...prev,
+                      varientPrice: e.target.value,
+                    }))
+                  }
+                  placeholder="100"
+                  className="w-[252px] h-[48px]  border border-[#E8EDF2] rounded-[8px] inputText"
+                  type="text"
+                />
+              </div>
+              <button
+                onClick={() => {
+                  setVarientsArray((prev)=>([...prev , varients]))
+                }}
+                className="py-[10px] px-[24px] h-fit rounded-[8px]  text-sm font-semibold font-poppins  text-white bg-brandColor active:scale-[1.1]"
+              >
+                Add
+              </button>
+            </div>
+
+            {
+            varientArray.length != 0 && (
+             
+              <div className="w-[300px] p-2 border-borderColor rounded-[5px] flex justify-between items-center bg-borderColor mt-5">
+                {varientArray.map((item , i) => (
+                  <div key={i} className="flex items-center justify-between w-full border-b">
+                    <h2 className="text-base font-medium  text-secend">{item.varientName}</h2>
+                    <h2 className="text-base font-medium  text-secend">
+                      {item.varientPrice} tk
+                    </h2>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           {/* -------------- column 2 */}
           <div>
@@ -178,8 +273,15 @@ const PorductUploadBoard = () => {
               </div>
             )}
             <div className="flex gap-5 items-center mt-[58px]">
-              <button className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-white bg-brandColor active:scale-[1.1]">Upload</button>
-              <button className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-secend bg-gray-200 active:scale-[1.1]">Reset</button>
+              <button
+                onClick={handelUpload}
+                className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-white bg-brandColor active:scale-[1.1]"
+              >
+                Upload
+              </button>
+              <button className="py-[10px] px-[24px]  rounded-[8px]  text-sm font-semibold font-poppins  text-secend bg-gray-200 active:scale-[1.1]">
+                Reset
+              </button>
             </div>
           </div>
         </div>

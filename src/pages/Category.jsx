@@ -9,7 +9,7 @@ import axios from "axios";
 const Category = () => {
   const [categorys, setCategorys] = useState([]);
   const [newCategory , setNewCastegory] = useState(true)
-  // ---- getting product category
+  
   useEffect(() => {
     const fetchCategory = async () => {
       try {

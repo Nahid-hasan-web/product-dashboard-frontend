@@ -6,12 +6,13 @@ import SingelProductCart from "../components/common/SingelProductCart";
 import ProductListHead from "../components/common/ProductListHead";
 import AccroHead from "../components/common/AccroHead";
 import { productApi } from "../api/productApi";
+import { useNavigate } from "react-router";
 
 const ManageProduct = () => {
 
   const [status ,setStatus] =  useState('all')
   const [productData , setProductData] = useState(null)
-
+  const navigate   = useNavigate()
 
 
 
@@ -25,6 +26,9 @@ const ManageProduct = () => {
     }
     catch(err){
       console.log(err)
+      if(err == 'Access token not found'){
+        navigate('/login')
+      }
     }
   },[status])
 

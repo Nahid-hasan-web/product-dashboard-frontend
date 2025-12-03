@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  FiShoppingCart,
-  FiDollarSign,
-  FiUsers,
-  FiBox,
-} from "react-icons/fi";
+import { FiShoppingCart, FiDollarSign, FiUsers, FiBox } from "react-icons/fi";
 import StatCard from "../components/common/StatCard";
 import CommonHead from "../components/common/CommonHead";
 import BreadCrumb from "../components/common/BreadCrumb";
@@ -14,9 +9,19 @@ import { useNavigate } from "react-router";
 import DailySalesReport from "../components/dashboard/charts/DailySalesReport";
 import MounthlySalesReport from "../components/dashboard/charts/MounthlySalesReport";
 import CancelOrderRatio from "../components/dashboard/charts/CancelOrderRatio";
+import dashboardApi from "../api/DashboardApi";
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [noList, setNoList] = useState("");
+  useEffect(() => {
+    const apiFun = async () => {
+      const apiData = await dashboardApi.getNoReport();
+      setNoList(apiData.data.data);
+    };
+    apiFun();
+  }, []);
 
+  console.log(noList);
 
   return (
     <div
@@ -31,42 +36,28 @@ const Dashboard = () => {
         <StatCard
           icon={<FiShoppingCart size={18} />}
           title="Total Orders"
-          value="1,245"
-          change="12.5%"
+          value={noList.totalOrders}
           positive={true}
-          caption="Compared to last month"
         />
         <StatCard
           icon={<FiDollarSign size={18} />}
           title="Total Sales"
-          value="$98,540"
-          change="34.7%"
+          value={`${noList.totalSales} Tk`}
           positive={true}
-          caption="Compared to last month"
         />
         <StatCard
           icon={<FiUsers size={18} />}
           title="Customers"
-          value="5,420"
-          change="8.4%"
+          value={noList.totalOrders}
           positive={true}
-          caption="Compared to last month"
-        />
-        <StatCard
-          icon={<FiBox size={18} />}
-          title="Products"
-          value="832"
-          change="-2.3%"
-          positive={false}
-          caption="Compared to last month"
         />
       </section>
       {/* --------------- dashboard charts */}
       <div className="grid grid-cols-5 grid-rows-5 gap-5   h-[700px]">
-        <DailySalesReport/>
-        <MounthlySalesReport/>
-        <CancelOrderRatio/>
-       
+        <DailySalesReport />
+        <MounthlySalesReport />
+        <CancelOrderRatio />
+
         <div className="row-span-3 col-start-5 row-start-3  bg-white flex p-4  rounded-[16px] shadow-[0px_3px_16px_0px_#00000024]">
           <h2 className="text-lg font-medium font-poppins text-secend">
             Top selling product
@@ -92,8 +83,8 @@ const Dashboard = () => {
           five={"Delivery Status"}
           six={"Price"}
         />
-        {[1, 2, 3, 4, 5, 6, 7].map((item) => (
-          <SingelOrderinfo />
+        {[1, 2, 3, 4, 5, 6, 7].map((item, i) => (
+          <SingelOrderinfo key={i} />
         ))}
         <br />
       </div>

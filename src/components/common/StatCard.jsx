@@ -18,9 +18,7 @@ const StatCard = ({
     <div className="bg-white rounded-xl border border-[var(--color-borderColor)] shadow-sm p-3 sm:p-4 w-full">
       <div className="flex items-start justify-between mb-3">
         <div className="text-xs sm:text-sm text-gray-500">{title}</div>
-        <button className="text-gray-400 hover:text-gray-600 p-1 rounded-full">
-          <FiMoreVertical />
-        </button>
+
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
@@ -37,9 +35,6 @@ const StatCard = ({
           <div>
             <div className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
               {value}
-            </div>
-            <div className="text-[10px] sm:text-xs text-gray-400">
-              Compared to last period
             </div>
           </div>
         </div>

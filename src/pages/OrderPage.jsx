@@ -8,13 +8,14 @@ import SingelOrderinfo from "../components/common/SingelOrderinfo";
 import { orderApi } from "../api/orderApi";
 const { RangePicker } = DatePicker;
 import { CiFaceFrown } from "react-icons/ci";
+import { useNavigate } from "react-router";
 
 const OrderPage = () => {
 
   const [orderList, setOrderList] = useState([]);
 
   const [date, setDate] = useState();
-
+  const navigate = useNavigate()
   useEffect(() => {
     const orderFun = async () => {
       try {
@@ -24,6 +25,9 @@ const OrderPage = () => {
         setOrderList(apiData.data);
       } catch (err) {
         console.log(err);
+        if(err.response.data ==='invalid token'){
+          navigate('/login')
+        }
       }
     };
     orderFun();

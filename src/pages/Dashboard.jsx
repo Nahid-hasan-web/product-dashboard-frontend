@@ -21,7 +21,6 @@ const Dashboard = () => {
     apiFun();
   }, []);
 
-  console.log(noList);
 
   return (
     <div

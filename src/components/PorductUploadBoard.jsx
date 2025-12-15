@@ -66,10 +66,13 @@ const PorductUploadBoard = () => {
       const apiData = await productApi.addProduct(productsForm);
       console.log(apiData);
       if(apiData){
-        setLoader(false)
+      setLoader(false)
+      tostifyMsg('info' , 'Porduct upload sucess')
+
       }
     } catch (err) {
       setLoader(false)
+      tostifyMsg('error' , 'Something went wrong please try again')
       console.log(err);
     }
   };

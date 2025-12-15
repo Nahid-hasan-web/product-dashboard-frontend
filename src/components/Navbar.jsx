@@ -49,7 +49,6 @@ const Navbar = () => {
     // ---- getting product category 
     useEffect(  ()=>{
       const fetchCategory = async ()=>{
-  
         try{
           const categoryData = await catgoryApi.getCagory()
           setCategorys(categoryData.data.categorys)
